@@ -1,4 +1,6 @@
 
+// Document root theme
+let _rootCSS = document.body.style;
 
 /**
  * Inject all KVPs from a dictionary into the document 
@@ -8,6 +10,17 @@
  * @param {*} source_dict 
  */
 function injectMultiCSS(prefix, source_dict) {
+
+    console.log(`[CSSInjector] Injecting css for: ${prefix}`);
+
+    // Iter through every variable, and add it to the site CSS
+    Object.keys(source_dict).forEach((k) => {
+
+        let varname = `--${prefix}-${k}`;
+        
+        _rootCSS += `${varname}:${source_dict[k]};`
+        
+    });
 
 }
 
