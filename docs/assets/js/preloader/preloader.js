@@ -1,3 +1,26 @@
+/**
+ * This file contains the code that powers the full-screen loading animation.
+ * Multiple animations can be created in the same webpage, and toggled individually.
+ * 
+ * --- Usage ---
+ * let myPreloader = new Preloader();
+ * 
+ * // Show the loader
+ * myPreloader.show(true);
+ * 
+ * // load some stuff
+ * // ...
+ * 
+ * // Fade out the animation
+ * myPreloader.hide(false);
+ * 
+ * --- How it works ---
+ * On creation, the Preloader injects some HTML into the webpage with a unique ID 
+ * for the instance. Hiding and showing works by modifying the active classes for 
+ * the loader. The "appear" and "disappear" classes will render their respective 
+ * animations in _sass/ui/page_loader.scss
+ */
+
 let preloaderCount = 0;
 
 /**
