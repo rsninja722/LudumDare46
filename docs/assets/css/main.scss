@@ -1,0 +1,24 @@
+---
+---
+
+@import "ui/fade-animation.scss";
+@import "ui/page-loader.scss";
+
+html {
+  box-sizing: border-box;
+}
+
+body{
+    padding: 0;
+    margin:0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.hidden {
+  display: none !important;
+}
