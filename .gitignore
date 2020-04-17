@@ -1,0 +1,5 @@
+# Jekyll
+docs/_site/*
+docs/.sass-cache/*
+docs/.jekyll-cache/*
+docs/node_modules
