@@ -21,7 +21,7 @@
  * animations in _sass/ui/page_loader.scss
  */
 
-let preloaderCount = 0;
+let _preloaderCount = 0;
 
 /**
  * A fullscreen loading animation utility
@@ -31,13 +31,13 @@ class Preloader {
     constructor() {
 
         // Add a preloader element to the page
-        document.body.innerHTML += `<div id="preloader${preloaderCount}" class="preloader hidden"><div class="spinner-border text-danger" role="status"></div></div>`;
-        preloaderCount += 1;
+        document.body.innerHTML += `<div id="preloader${_preloaderCount}" class="preloader hidden"><div class="spinner-border text-danger" role="status"></div></div>`;
+        _preloaderCount += 1;
 
         // Get the element context for controlling
-        this.element = document.getElementById(`preloader${preloaderCount - 1}`);
+        this.element = document.getElementById(`preloader${_preloaderCount - 1}`);
 
-        console.log(`[Preloader] Created preloader ${preloaderCount - 1}`);
+        console.log(`[Preloader] Created preloader ${_preloaderCount - 1}`);
 
     }
 

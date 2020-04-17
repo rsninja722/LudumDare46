@@ -6,11 +6,15 @@ var constants = {
         // These are the variables that control injection/cssinjector.js
         // To add a new theme var, you must also add it to the injector
         theme: {
+
+            // Theme variables specific to the webpage container
             webpage: {
                 bg_color: "#242424",
                 text_color: "#ffffff",
                 canvas_border: "rgb(63, 63, 63)"
             },
+
+            // Theme variables specific to the game
             game: {
                 
             }
