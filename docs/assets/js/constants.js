@@ -11,7 +11,8 @@ var constants = {
             webpage: {
                 bg_color: "#242424",
                 text_color: "#ffffff",
-                canvas_border: "rgb(63, 63, 63)"
+                canvas_border: "rgb(63, 63, 63)",
+                loading_animation_color: "#ff4136"
             },
 
             // Theme variables specific to the game

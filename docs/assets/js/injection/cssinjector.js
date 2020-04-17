@@ -1,6 +1,13 @@
+/**
+ * This file contains code that injects variables from constants.js 
+ * into the document root as CSS variables or use inside style scripts.
+ * 
+ * To add a new dictionary of variables to the document, just add a 
+ * new line to the "mappings" section
+ */
 
-// Document root theme
-let _rootCSS = document.body.style;
+// Document root style object
+let _rootStyle = document.documentElement.style;
 
 /**
  * Inject all KVPs from a dictionary into the document 
@@ -17,12 +24,13 @@ function injectMultiCSS(prefix, source_dict) {
     Object.keys(source_dict).forEach((k) => {
 
         let varname = `--${prefix}-${k}`;
-        
-        _rootCSS += `${varname}:${source_dict[k]};`
-        
+
+        _rootStyle.setProperty(varname, source_dict[k]);
+
     });
 
 }
+
 
 /* Mappings from constants file to CSS */
 // If you are adding theme variables to constants.js, 

@@ -5,14 +5,14 @@
         <title>title</title>
         <style>
             html {
-                background-color: #242424;
-                color: white;
+                background-color: var(--theme-webpage-bg_color);
+                color: var(--theme-webpage-text_color);
             }
             canvas {
                 position:absolute;
                 top:0;bottom:0;right:0;left:0;
                 margin:auto;
-                border: 5px solid rgb(63, 63, 63); 
+                border: 5px solid var(--theme-webpage-canvas_border);
                 border-radius: 10px;
             }
         </style>
@@ -20,10 +20,19 @@
     </head>
     <body>
         <canvas width="1000" height="800" id="game"></canvas>
+
+        <!-- Graphics Library -->
         <script src="assets/js/game.js"></script>
+
+        <!-- Constants & Globals -->
         <script src="assets/js/constants.js"></script>
         <script src="assets/js/utils.js"></script>
+
+        <!-- Webpage -->
+        <script src="assets/js/injection/cssinjector.js"></script>
         <script src="assets/js/preloader/preloader.js"></script>
+
+        <!-- Game -->
         <script src="assets/js/index.js"></script>
     </body>
 </html>
