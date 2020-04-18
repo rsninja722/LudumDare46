@@ -3,4 +3,6 @@ function handlePlaying() {
     if(keyPress[k.BACKSLASH]) {
         globalState = globalStates.building;
     }
+
+    updateLife();
 }

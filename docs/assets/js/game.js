@@ -350,9 +350,10 @@ function circle(x,y,r,color) {
 
 function line(x1, y1, x2, y2, color) {
     curCtx.beginPath();
-    curCtx.style = color;
+    curCtx.strokeStyle = color;
     curCtx.moveTo(x1 + camera.x + difx, y1 + camera.y + dify);
-    curCtx.lineTo(x2 + camera.x + difx, y2 + camera.y + dify);
+    curCtx.lineTo(x2  + camera.x + difx , y2 + camera.y + dify);
+    curCtx.stroke();
 }
 
 function shape(x,y,relitivePoints,color) {

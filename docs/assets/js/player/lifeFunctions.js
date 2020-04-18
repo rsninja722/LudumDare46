@@ -8,13 +8,13 @@ var timeSinceLastBeat = 0;
 
 function updateLife() {
     
-    if(keyDown[k.Z]) {
+    if(keyDown[k.z]) {
         breathe();
     } else {
         breath--;
     }
 
-    if(keyPress[k.X]) {
+    if(keyPress[k.x]) {
         heartbeat();
     } else {
         timeSinceLastBeat++;
@@ -38,7 +38,6 @@ function breathe() {
 };
 
 function heartbeat() {
-
     timeSinceLastBeat = 0;
 
 };
