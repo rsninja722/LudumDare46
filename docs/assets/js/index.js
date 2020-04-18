@@ -3,7 +3,8 @@ var page_preloader = new Preloader();
 page_preloader.show(true);
 
 images = [
-    ""
+    "assets/images/",
+    "level.png"
 ];
 
 audio = [
@@ -68,7 +69,7 @@ function draw() {
             break;
         // playing
         case globalStates.playing:
-            camera.zoom = 2;
+            camera.zoom = 1;
             drawWorldBlocks();
             player.draw();
             break;
@@ -82,6 +83,7 @@ function draw() {
             break;
         //building - to be used only in development
         case globalStates.building:
+            imgIgnoreCutoff(sprites.level,0,0);
             buildDraw();
             break;
     }
