@@ -34,6 +34,11 @@ var constants = {
                 complex_width: 18
         }
     },
+    lifeFuncs:{
+      breath:{
+          fullBreath: 200
+      }
+    },
     legs:{
         size:{
             maximumMovement: 30

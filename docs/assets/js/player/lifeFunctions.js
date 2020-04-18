@@ -17,14 +17,13 @@ function updateLife() {
     if(keyPress[k.x]) {
         heartbeat();
     }
-
 };
 
 function breathe() {
 
     breath += 5;
-    if(breath >= 200) {
-        breath = 200;
+    if(breath >= constants.lifeFuncs.breath.fullBreath) {
+        breath = constants.lifeFuncs.breath.fullBreath;
         fullBreathTimer++;
         if(fullBreathTimer >= 60) {
             //cough and lose breath or something
@@ -37,5 +36,4 @@ function breathe() {
 
 function heartbeat() {
     heartBeat = true;
-
 };

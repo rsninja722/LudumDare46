@@ -1,5 +1,3 @@
-//Colors
-
 // UI for title screen
 function drawTitleScreenUI() {
 }
@@ -10,7 +8,12 @@ function drawLevelTransitionUI() {
 
 // UI for playing
 function drawPlayingUI() {
+
+    //Heart Rate Monitor
     heartBeatUI(cw/4*3-8,ch/8*7-8,cw/4,ch/8);
+
+    //Respiration Monitor
+    respiratoryUI(cw/8*5,ch/8*7-8, cw/16, ch/8);
 }
 
 //UI for pause screen
@@ -21,11 +24,26 @@ function drawPausedUI() {
 function drawEndUI() {
 }
 
-// Construct a rectangular UI
-function rectUI() {};
+
+/***
+ *
+ * RESPIRATORY UI
+ *
+ */
+
+function respiratoryUI(x, y, width, height){
+    cartesianRect(x,y,width,height, "black");
+    cartesianRect(x,y+(height-breath/constants.lifeFuncs.breath.fullBreath*height), width, breath/constants.lifeFuncs.breath.fullBreath*height, "teal");
+}
+
+/***
+ *
+ * HEART RATE MONITOR UI
+ *
+ */
 
 //Heart rate monitor history 
-let heartBeatHistory = []
+let heartBeatHistory = [];
     heartBeatHistory.length = constants.ui.heartRate.history_length;
     heartBeatHistory.fill(0);
 
@@ -33,7 +51,7 @@ let heartBeatHistory = []
 let shiftAccum = 0;
 
 //Beat progression
-let beatTimeElapsed = 0;
+let beatTimeElapsed = Infinity;
 
 // Draw heartbeat UI
 function heartBeatUI(x, y, width, height){
@@ -64,7 +82,7 @@ function heartBeatUI(x, y, width, height){
     for (let index = 0; index < heartBeatHistory.length; index++) {
         const qrsValueAtPosition = heartBeatHistory[index];
         const qrsValueAtNextPosition = heartBeatHistory[index+1];
-        line(x+(index*width/heartBeatHistory.length), y+(2*height/3)+(qrsValueAtPosition*width/heartBeatHistory.length), x+((index+1)*width/heartBeatHistory.length), y+(2*height/3)+(qrsValueAtNextPosition*width/heartBeatHistory.length), "red");
+        line(x+(index*width/heartBeatHistory.length), y+(2*height/3)+(qrsValueAtPosition*width/heartBeatHistory.length), x+((index+1)*width/heartBeatHistory.length), y+(2*height/3)+(qrsValueAtNextPosition*width/heartBeatHistory.length),Math.min(3,Math.max(3/beatTimeElapsed,1)), "red");
     }
 }
 
