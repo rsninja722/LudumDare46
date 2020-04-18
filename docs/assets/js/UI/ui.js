@@ -9,6 +9,8 @@ function drawLevelTransitionUI() {
 // UI for playing
 function drawPlayingUI() {
 
+    cartesianRect(0,ch/3*2, cw, ch/3, "#333333")
+
     //Heart Rate Monitor
     heartBeatUI(cw/4*3-8,ch/8*7-8,cw/4,ch/8);
 
@@ -32,8 +34,8 @@ function drawEndUI() {
  */
 
 function respiratoryUI(x, y, width, height){
-    cartesianRect(x,y,width,height, "black");
-    cartesianRect(x,y+(height-breath/constants.lifeFuncs.breath.fullBreath*height), width, breath/constants.lifeFuncs.breath.fullBreath*height, "teal");
+    cartesianRect(x,y,width,height, "rgb("+noBreathTimer/180*255+","+0+","+0+")");
+    cartesianRect(x,y+(height-breath/constants.lifeFuncs.breath.fullBreath*height), width, breath/constants.lifeFuncs.breath.fullBreath*height, "rgb("+255+","+(255-fullBreathTimer/180*255)+","+(255-fullBreathTimer/180*255)+")");
 }
 
 /***
