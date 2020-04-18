@@ -26,16 +26,32 @@ var constants = {
                 history_length: 100,
 
                 //300 squares/min
-                scroll_speed: 0.13333,
-                pr_width: 0.16,
-                qrs_width: 0.1,
-                qt_width: 0.39,
-                complex_width: 0.65
+                scroll_speed: 0.8,
+                square_size: 0.08,
+                pr_width: 4,
+                qrs_width: 2,
+                qt_width: 5,
+                complex_width: 18
         }
     },
-    legs:{
-        size:{
-            maximumMovement: 30
+    lifeFuncs:{
+        breath:{
+            fullBreath: 200
+        },
+        cardio:{
+            optimalPressure: 50
+        }
+    },
+    player:{
+        leg_speed: 0.1,
+        movement_divider: 50,
+        max_movement_speed: 3,
+        width: 30,
+        height: 50,
+        select_range: 10,
+        hip: {
+            offset_x: 15,
+            offset_y: 25
         }
     }
 
