@@ -19,6 +19,24 @@ var constants = {
             game: {
                 
             }
+        },
+            
+        // Heart rate monitor UI constants
+        heartRate: {
+                history_length: 100,
+
+                //300 squares/min
+                scroll_speed: 0.13333,
+                pr_width: 0.16,
+                qrs_width: 0.1,
+                qt_width: 0.39,
+                complex_width: 0.65
+        }
+    },
+    legs:{
+        size:{
+            maximumMovement: 30
         }
     }
+
 };
