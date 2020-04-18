@@ -62,7 +62,9 @@ function draw() {
             break;
         // playing
         case globalStates.playing:
+            camera.zoom = 2;
             drawWorldBlocks();
+            player.draw();
             break;
         // paused
         case globalStates.paused:
@@ -92,7 +94,6 @@ function absoluteDraw() {
         // playing
         case globalStates.playing:
             drawPlayingUI();
-            player.draw();
             break;
         // paused
         case globalStates.paused:
