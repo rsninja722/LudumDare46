@@ -35,9 +35,12 @@ var constants = {
         }
     },
     lifeFuncs:{
-      breath:{
-          fullBreath: 200
-      }
+        breath:{
+            fullBreath: 200
+        },
+        cardio:{
+            optimalPressure: 50
+        }
     },
     legs:{
         size:{

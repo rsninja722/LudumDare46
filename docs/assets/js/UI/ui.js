@@ -80,11 +80,18 @@ function heartBeatUI(x, y, width, height){
     //Backdrop
     rect(x+width/2,y+height/2,width,height,"black");
 
+    //Pressure Meter
+    rect(x+width-8,y+height/2,16,height,"red");
+    rect(x+width-8,y+height/2,16,height/2,"yellow");
+    rect(x+width-8,y+height/2,16,height/6,"green");
+    let pressureHeight = Math.max(Math.min(y+height-(pressure/constants.lifeFuncs.cardio.optimalPressure*height/2),y+height),y);
+    line(x+width-16, pressureHeight,x+width,pressureHeight, 2,"black")
+
     //Graph
     for (let index = 0; index < heartBeatHistory.length; index++) {
         const qrsValueAtPosition = heartBeatHistory[index];
         const qrsValueAtNextPosition = heartBeatHistory[index+1];
-        line(x+(index*width/heartBeatHistory.length), y+(2*height/3)+(qrsValueAtPosition*width/heartBeatHistory.length), x+((index+1)*width/heartBeatHistory.length), y+(2*height/3)+(qrsValueAtNextPosition*width/heartBeatHistory.length),Math.min(3,Math.max(3/beatTimeElapsed,1)), "red");
+        line(x+(index*(width-16)/heartBeatHistory.length), y+(2*height/3)+(qrsValueAtPosition*(width-16)/heartBeatHistory.length), x+((index+1)*(width-16)/heartBeatHistory.length), y+(2*height/3)+(qrsValueAtNextPosition*(width-16)/heartBeatHistory.length),Math.min(3,Math.max(3/beatTimeElapsed,1)), "red");
     }
 }
 
