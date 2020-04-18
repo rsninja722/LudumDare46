@@ -51,6 +51,12 @@ function update() {
 }
 
 function draw() {
+
+    // If draw is being called, the user has interacted with the page at least once.
+    // This signal can be used to notify the audio permission handler
+    unlockAudioPermission();
+
+    // Handle game state
     switch (globalState) {
         // title screen
         case globalStates.titleScreen:
@@ -113,6 +119,25 @@ function onAssetsLoaded() {
 
 setup(60);
 
-// Hide the preloader
-// This should actually run after all assets have been downloaded
-page_preloader.hide(false);
+/* Preload actions */
+
+// To make something happen before the preloader is hidden, add it to this list
+// The function must take a callback that will be run when the function finishes
+let actions = [preCacheSounds];
+let actionsCompleted = 0;
+
+// Loop through every action, and load it
+actions.forEach((action) => {
+    
+    // Run the action & handle loading
+    action(() => {
+        
+        // Incr the number of successfully loaded actions
+        actionsCompleted += 1;
+
+        // If this is the last aciton, hide the loader
+        if (actionsCompleted == actions.length) {
+            page_preloader.hide(false);
+        }
+    })
+});

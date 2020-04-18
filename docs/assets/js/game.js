@@ -341,6 +341,11 @@ function rect(x,y,w,h,color) {
     curCtx.fillRect(x-(w/2)+camera.x+difx,y-(h/2)+camera.y+dify,w,h);
 }
 
+function cartesianRect(x,y,w,h,color) {
+    curCtx.fillStyle = color;
+    curCtx.fillRect(x+camera.x+difx,y+camera.y+dify,w,h);
+}
+
 function circle(x,y,r,color) {
     curCtx.beginPath();
     curCtx.arc(x+camera.x+difx, y+camera.y+dify, r, 0, 2 * Math.PI, false);
@@ -348,11 +353,12 @@ function circle(x,y,r,color) {
     curCtx.fill();
 }
 
-function line(x1, y1, x2, y2, color) {
+function line(x1, y1, x2, y2, weight, color) {
     curCtx.beginPath();
-    curCtx.style = color;
+    curCtx.strokeStyle = color;
+    curCtx.lineWidth = weight;
     curCtx.moveTo(x1 + camera.x + difx, y1 + camera.y + dify);
-    curCtx.lineTo(x2 + camera.x + difx, y2 + camera.y + dify);
+    curCtx.lineTo(x2  + camera.x + difx , y2 + camera.y + dify);
     curCtx.stroke();
 }
 
