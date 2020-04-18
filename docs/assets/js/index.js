@@ -18,13 +18,14 @@ var globalStates = {
     end: 4,
     building: 5
 };
-var globalState = globalStates.playing;
+var globalState = globalStates.titleScreen;
 
 function update() {
+        
     switch (globalState) {
         // title screen
         case globalStates.titleScreen:
-
+            handleTitleScreen();
             break;
         // level transition
         case globalStates.levelTransition:
@@ -60,7 +61,7 @@ function draw() {
     switch (globalState) {
         // title screen
         case globalStates.titleScreen:
-
+            drawTitleScreen();
             break;
         // level transition
         case globalStates.levelTransition:
