@@ -33,6 +33,7 @@ function update() {
         // playing
         case globalStates.playing:
             handlePlaying();
+            player.update();
             break;
         // paused
         case globalStates.paused:
@@ -91,6 +92,7 @@ function absoluteDraw() {
         // playing
         case globalStates.playing:
             drawPlayingUI();
+            player.draw();
             break;
         // paused
         case globalStates.paused:
