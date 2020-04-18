@@ -18,11 +18,11 @@ let currentBreathMode = breathMode.exhale;
 function updateLife() {
     
     if(keyDown[k.UP]) {
-        currentBreathMode = breathMode.inhale;
+        if(breath === 0) currentBreathMode = breathMode.inhale;
     }
 
     if(keyDown[k.DOWN]) {
-        currentBreathMode = breathMode.exhale;
+        if(breath === constants.lifeFuncs.breath.fullBreath) currentBreathMode = breathMode.exhale;
     }
 
     breathe();
