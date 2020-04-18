@@ -11,27 +11,28 @@ audio = [
 ];
 
 var globalStates = {
-    titleScreen:0,
-    starting:1,
-    playing:2,
-    paused:3,
-    end:4
+    titleScreen: 0,
+    levelTransition: 1,
+    playing: 2,
+    paused: 3,
+    end: 4,
+    building: 5
 };
-var globalState = globalStates.titleScreen;
+var globalState = globalStates.playing;
 
 function update() {
-    switch(globalState) {
+    switch (globalState) {
         // title screen
         case globalStates.titleScreen:
 
             break;
-        // starting
-        case globalStates.starting:
+        // level transition
+        case globalStates.levelTransition:
 
             break;
         // playing
         case globalStates.playing:
-
+            handlePlaying();
             break;
         // paused
         case globalStates.paused:
@@ -41,19 +42,65 @@ function update() {
         case globalStates.end:
 
             break;
+        //building - to be used only in development
+        case globalStates.building:
+            buildUpdate();
+            break;
     }
 }
 
-function input() {
-
-}
-
 function draw() {
+    switch (globalState) {
+        // title screen
+        case globalStates.titleScreen:
 
+            break;
+        // level transition
+        case globalStates.levelTransition:
+
+            break;
+        // playing
+        case globalStates.playing:
+            drawWorldBlocks();
+            break;
+        // paused
+        case globalStates.paused:
+
+            break;
+        // end
+        case globalStates.end:
+
+            break;
+        //building - to be used only in development
+        case globalStates.building:
+            buildDraw();
+            break;
+    }
 }
 
 function absoluteDraw() {
-
+    switch (globalState) {
+        // title screen
+        case globalStates.titleScreen:
+            drawTitleScreenUI();
+            break;
+        // level transition
+        case globalStates.levelTransition:
+            drawLevelTransitionUI();
+            break;
+        // playing
+        case globalStates.playing:
+            drawPlayingUI();
+            break;
+        // paused
+        case globalStates.paused:
+            drawPausedUI();
+            break;
+        // end
+        case globalStates.end:
+            drawEndUI();
+            break;
+    }
 }
 
 function onAssetsLoaded() {
