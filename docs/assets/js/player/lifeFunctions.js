@@ -1,32 +1,29 @@
 
-var breath = 180;
-var fullBreathTimer = 0;
-var heartRate = 60;
+let breath = 180;
+let fullBreathTimer = 0;
+let heartRate = 60;
 
-var timeSinceLastBeat = 0;
+let heartBeat = false;
 
 
 function updateLife() {
     
-    if(keyDown[k.Z]) {
+    if(keyDown[k.z]) {
         breathe();
     } else {
         breath--;
     }
 
-    if(keyPress[k.X]) {
+    if(keyPress[k.x]) {
         heartbeat();
-    } else {
-        timeSinceLastBeat++;
     }
-
 };
 
 function breathe() {
 
     breath += 5;
-    if(breath >= 200) {
-        breath = 200;
+    if(breath >= constants.lifeFuncs.breath.fullBreath) {
+        breath = constants.lifeFuncs.breath.fullBreath;
         fullBreathTimer++;
         if(fullBreathTimer >= 60) {
             //cough and lose breath or something
@@ -38,7 +35,5 @@ function breathe() {
 };
 
 function heartbeat() {
-
-    timeSinceLastBeat = 0;
-
+    heartBeat = true;
 };
