@@ -17,7 +17,7 @@ let soundAssetMap = {
 
 // All available sounds
 let soundAssets = {
-    debug_ding: new SoundSnippet("debug-ding")
+    debug_ding: new SoundSnippet("debug-ding", audioAssetType.sfx)
 }
 
 /**
