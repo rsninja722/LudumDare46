@@ -17,12 +17,9 @@ let currentBreathMode = breathMode.exhale;
 
 function updateLife() {
     
-    if(keyDown[k.w]) {
+    if(keyDown[k.z]) {
         if(breath === 0) currentBreathMode = breathMode.inhale;
-    }
-
-    if(keyDown[k.s]) {
-        if(breath === constants.lifeFuncs.breath.fullBreath) currentBreathMode = breathMode.exhale;
+        else if(breath === constants.lifeFuncs.breath.fullBreath) currentBreathMode = breathMode.exhale;
     }
 
     breathe();
@@ -31,7 +28,7 @@ function updateLife() {
         heartbeat();
     }
 
-    pressure-=0.25;
+    pressure-=0.1;
     if(pressure<=0){
         pressure = 0;
     }
