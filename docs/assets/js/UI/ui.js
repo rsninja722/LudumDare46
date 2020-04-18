@@ -9,6 +9,8 @@ function drawLevelTransitionUI() {
 // UI for playing
 function drawPlayingUI() {
 
+    cartesianRect(0,ch/3*2, cw, ch/3, "#333333")
+
     //Heart Rate Monitor
     heartBeatUI(cw/4*3-8,ch/8*7-8,cw/4,ch/8);
 
