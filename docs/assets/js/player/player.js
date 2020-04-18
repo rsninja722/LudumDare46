@@ -37,7 +37,8 @@ Player.prototype.update = function() {
     // select
     if (this.shouldMoveLeg) { 
         this.moveLeg();
-        if(mousePress[0]) {// if (collidingWithWorld({ x: curLeg.x2, y: curLeg.y2, w: 4, h: 4 })) {
+        if(mousePress[0] && collidingWithWorld({x: curLeg.x2, y: curLeg.y2, w:8, h:8})) {
+
             if (this.legSelected === "R") {
                 this.leftLeg.angle += pi;
             } else {
