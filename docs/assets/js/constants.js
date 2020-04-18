@@ -42,9 +42,16 @@ var constants = {
             optimalPressure: 50
         }
     },
-    legs:{
-        size:{
-            maximumMovement: 30
+    player:{
+        leg_speed: 0.1,
+        movement_divider: 50,
+        max_movement_speed: 3,
+        width: 30,
+        height: 50,
+        select_range: 10,
+        hip: {
+            offset_x: 15,
+            offset_y: 25
         }
     }
 

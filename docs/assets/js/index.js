@@ -33,6 +33,7 @@ function update() {
         // playing
         case globalStates.playing:
             handlePlaying();
+            player.update();
             break;
         // paused
         case globalStates.paused:
@@ -67,7 +68,9 @@ function draw() {
             break;
         // playing
         case globalStates.playing:
+            camera.zoom = 2;
             drawWorldBlocks();
+            player.draw();
             break;
         // paused
         case globalStates.paused:
