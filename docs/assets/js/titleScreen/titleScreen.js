@@ -24,7 +24,7 @@ function handleTitleScreen(){
 function handleMainScreen(){
     if(timer > 20){
         if(rectpoint({x:415, y:200, w: 300, h: 50}, {x:cursor.x, y:cursor.y}) && mouseDown[0]){
-            globalStates = globalStates.playing;
+            globalState = globalStates.playing;
             timer = 0;
         }
         if(rectpoint({x:415, y:550, w: 300, h: 50}, {x:cursor.x, y:cursor.y}) && mouseDown[0]){
@@ -41,7 +41,6 @@ function handleCredits(){
 
     if(timer > 20){
         if(rectpoint({x:395, y:550, w: 140, h: 50}, {x:cursor.x, y:cursor.y}) && mouseDown[0]){
-            
             titleScreenState = "main";
             timer = 0;
         }
