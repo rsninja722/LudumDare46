@@ -12,8 +12,11 @@
  *      // ...
  * });
  * 
- * // Play a sound
+ * // Play a sound using channels
  * globalSoundContext.playSound(globalSoundContext.channels.<channel>, sounds.<soundname>);
+ * 
+ * // Just play a sound now
+ * globalSoundContext.playSoundNow(sounds.<soundname>);
  * 
  * // Stop a channel
  * globalSoundContext.mute(globalSoundContext.channels.<channel>);
@@ -39,10 +42,12 @@ class _SoundChannel {
      */
     enqueue(snippet) {
 
+        console.log(this.sound_queue)
+
         // If the queue is full, cut out the next sound in the queue to make room
-        if (this.sound_queue.length >= this.max_size) {
-            this.sound_queue.splice(1, 1);
-        }
+        // if (this.sound_queue.length > this.max_size) {
+        //     this.sound_queue.splice(1, 1);
+        // }
 
         // Append the sound to the queue
         this.sound_queue.push(snippet);
@@ -66,7 +71,7 @@ class _SoundChannel {
         // Spawn a clean action for that time in the future
         setTimeout(() => {
             this._cleanQueue(snippet);
-        }, length);
+        }, length * 1000);
     }
 
     /**
@@ -91,7 +96,6 @@ class _SoundChannel {
                 this.sound_queue.shift();
 
             }
-
 
             // Spawn a watcher for the next sound & play it
             if (this.sound_queue.length > 0) {
@@ -124,7 +128,7 @@ class _SoundContext {
 
         // Define all sound channels
         this.channels = {
-            bgm: new _SoundChannel(2)
+            bgm: new _SoundChannel(3)
         }
     }
 
@@ -136,6 +140,14 @@ class _SoundContext {
     playSound(channel, snippet) {
         console.log(`[SoundContext] Playing snippet: ${snippet.getName()}`);
         channel.enqueue(snippet);
+    }
+
+    /**
+     * Play a sound right now
+     * @param {SoundSnippet} snippet 
+     */
+    playSoundNow(snippet) {
+        snippet.play();
     }
 
     /**
