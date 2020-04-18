@@ -45,25 +45,19 @@ Player.prototype.moveLeg = function(){
     var curLeg = this.getActiveLeg();
     var target = mousePos;
 
-
     // Last leg position
     var lastX = curLeg.x2;
     var lastY = curLeg.y2;
 
-
+    
     // move selected leg towards mouse
-   
     // console.log(curLeg.angle.toPrecision(5),pointTo(curLeg,target).toPrecision(5));
     curLeg.angle = turn( curLeg.angle,pointTo(curLeg,target),0.1);
     // var angle = pointTo(curLeg,target);
     curLeg.x2 = curLeg.x + curLeg.len * Math.cos(curLeg.angle);
     curLeg.y2 = curLeg.y + curLeg.len * Math.sin(curLeg.angle);
 
-    // curLeg.angle = pointTo(curLeg,{x:curLeg.x2,y:curLeg.y2});
 
-
-    console.log(this.legSelected);
-    debugger
     // Collision
     if(collidingWithWorld({x:curLeg.x2,y:curLeg.y2,w:4,h:4})){
         this.collided = true;
@@ -106,10 +100,10 @@ Player.prototype.moveLeg = function(){
 
         curLeg.x = this.hipLeft.x;
         curLeg.y = this.hipLeft.y;
-        console.log(oppLeg.angle)
+        //console.log(oppLeg.angle)
     // if leg is left update it accordingly
     } else {
-        console.log(curLeg.angle)
+        //console.log(curLeg.angle)
          // set angle to the locked foot to the locked hip
         oppLeg = this.getLockedLeg();
         oppLeg.angle = pointTo({x:oppLeg.x2,y:oppLeg.y2},this.hipLeft);
@@ -145,6 +139,7 @@ Player.prototype.updateHips = function() {
 
 Player.prototype.draw = function() {
     rect(this.x, this.y, this.w, this.h,"green");
+    
     this.leftLeg.draw();
     this.rightLeg.draw();
 }
@@ -152,34 +147,23 @@ Player.prototype.draw = function() {
 Player.prototype.update = function() {
     this.moveLeg();
     var curLeg = this.getActiveLeg();
-    if(mousePress[0] || this.collided){//collidingWithWorld({x:curLeg.x2,y:curLeg.y2,w:4,h:4})||
+    if(mousePress[0] || this.collided){
         if(this.legSelected === "R"){
             this.legSelected = "L";
-<<<<<<< HEAD
-            this.lastFootX = this.leftLeg.x2;
-            this.lastFootX = this.leftLeg.y2;
-        } else {
-            this.legSelected = "R";
-            this.lastFootX = this.rightLeg.x2;
-            this.lastFootX = this.rightLeg.x2;
-
-=======
             this.leftLeg.angle += pi;
         } else {
             this.legSelected = "R";
             this.rightLeg.angle += pi;
->>>>>>> 7a71387b4279ade1d4c8c0ec73a82d0e4ab40b47
         }
 
         this.collided = false;
         
     }
+    centerCameraOn(this.x,this.y);
 }
 
 
 
-<<<<<<< HEAD
-var player = new Player(400,200);
-=======
-var player = new Player(250,200);
->>>>>>> 7a71387b4279ade1d4c8c0ec73a82d0e4ab40b47
+
+var player = new Player(500,100);
+
