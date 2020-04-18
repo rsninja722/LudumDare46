@@ -1,9 +1,9 @@
 
-var breath = 180;
-var fullBreathTimer = 0;
-var heartRate = 60;
+let breath = 180;
+let fullBreathTimer = 0;
+let heartRate = 60;
 
-var timeSinceLastBeat = 0;
+let heartBeat = false;
 
 
 function updateLife() {
@@ -16,8 +16,6 @@ function updateLife() {
 
     if(keyPress[k.x]) {
         heartbeat();
-    } else {
-        timeSinceLastBeat++;
     }
 
 };
@@ -38,6 +36,6 @@ function breathe() {
 };
 
 function heartbeat() {
-    timeSinceLastBeat = 0;
+    heartBeat = true;
 
 };
