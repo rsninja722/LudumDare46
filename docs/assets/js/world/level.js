@@ -24,9 +24,9 @@ function drawWorldBlocks() {
 }
 
 function collidingWithWorld(objectWithXYWH) {
-    for (let i = 0, l = collisionRects.length; i < l; i++) {
+    for (var i = 0; i < collisionRects.length; i++) {
         if (rectrect(collisionRects[i], objectWithXYWH)) {
-            return i;
+            return true;
         }
     }
     return false;

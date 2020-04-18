@@ -36,7 +36,6 @@ Player.prototype.getLockedLeg = function(){
 
 // leg has been selected, move leg towards mouse
 Player.prototype.moveLeg = function(){
-
     // Stops if we shouldn't move leg
     if(!this.shouldMoveLeg){
         return 0;
@@ -46,15 +45,22 @@ Player.prototype.moveLeg = function(){
     var curLeg = this.getActiveLeg();
     var target = mousePos;
 
+
     // Last leg position
     var lastX = curLeg.x2;
     var lastY = curLeg.y2;
 
-    // var angle = turn(pointTo(curLeg,{x:curLeg.x2,y:curLeg.y2}),pointTo(curLeg,target),0.1);
-    var angle = pointTo(curLeg,target);
-    
-    curLeg.x2 = curLeg.x + curLeg.len * Math.cos(angle);
-    curLeg.y2 = curLeg.y + curLeg.len * Math.sin(angle);
+
+    // move selected leg towards mouse
+   
+    // console.log(curLeg.angle.toPrecision(5),pointTo(curLeg,target).toPrecision(5));
+    curLeg.angle = turn( curLeg.angle,pointTo(curLeg,target),0.1);
+    // var angle = pointTo(curLeg,target);
+    curLeg.x2 = curLeg.x + curLeg.len * Math.cos(curLeg.angle);
+    curLeg.y2 = curLeg.y + curLeg.len * Math.sin(curLeg.angle);
+
+    // curLeg.angle = pointTo(curLeg,{x:curLeg.x2,y:curLeg.y2});
+
 
     console.log(this.legSelected);
     debugger
@@ -76,9 +82,9 @@ Player.prototype.moveLeg = function(){
 
     if(dist(curLeg,target) > curLeg.len) {
         // move towards mouse
-        this.x += Math.cos(angle) * dist(curLeg,target)/50;
-        
-        this.y += Math.sin(angle) * dist(curLeg,target)/50;
+        this.x += Math.cos(pointTo(curLeg,target)) * clamp(dist(curLeg,target)/50,1,3);
+
+        this.y += Math.sin(pointTo(curLeg,target)) * clamp(dist(curLeg,target)/50,1,3);
         this.updateHips();
     }
 
@@ -86,11 +92,11 @@ Player.prototype.moveLeg = function(){
     if(this.legSelected === "R") {
         // set angle to the locked foot to the locked hip
         oppLeg = this.getLockedLeg();
-        angle = pointTo({x:oppLeg.x2,y:oppLeg.y2},this.hipRight);
+        oppLeg.angle = pointTo({x:oppLeg.x2,y:oppLeg.y2},this.hipRight);
 
         // snap body to a position where the hip is attached to the leg
-        this.x = (oppLeg.x2 + oppLeg.len * Math.cos(angle)) - 5;
-        this.y = (oppLeg.y2 + oppLeg.len * Math.sin(angle)) - 10;
+        this.x = (oppLeg.x2 + oppLeg.len * Math.cos(oppLeg.angle)) - 5;
+        this.y = (oppLeg.y2 + oppLeg.len * Math.sin(oppLeg.angle)) - 10;
 
         this.updateHips();
         
@@ -100,14 +106,18 @@ Player.prototype.moveLeg = function(){
 
         curLeg.x = this.hipLeft.x;
         curLeg.y = this.hipLeft.y;
+        console.log(oppLeg.angle)
+    // if leg is left update it accordingly
     } else {
+        console.log(curLeg.angle)
          // set angle to the locked foot to the locked hip
         oppLeg = this.getLockedLeg();
-        angle = pointTo({x:oppLeg.x2,y:oppLeg.y2},this.hipLeft);
+        oppLeg.angle = pointTo({x:oppLeg.x2,y:oppLeg.y2},this.hipLeft);
+
 
         // snap body to a position where the hip is attached to the leg
-        this.x = (oppLeg.x2 + oppLeg.len * Math.cos(angle)) + 5;
-        this.y = (oppLeg.y2 + oppLeg.len * Math.sin(angle)) - 10;
+        this.x = (oppLeg.x2 + oppLeg.len * Math.cos(oppLeg.angle)) + 5;
+        this.y = (oppLeg.y2 + oppLeg.len * Math.sin(oppLeg.angle)) - 10;
 
         this.updateHips();
 
@@ -145,6 +155,7 @@ Player.prototype.update = function() {
     if(mousePress[0] || this.collided){//collidingWithWorld({x:curLeg.x2,y:curLeg.y2,w:4,h:4})||
         if(this.legSelected === "R"){
             this.legSelected = "L";
+<<<<<<< HEAD
             this.lastFootX = this.leftLeg.x2;
             this.lastFootX = this.leftLeg.y2;
         } else {
@@ -152,6 +163,12 @@ Player.prototype.update = function() {
             this.lastFootX = this.rightLeg.x2;
             this.lastFootX = this.rightLeg.x2;
 
+=======
+            this.leftLeg.angle += pi;
+        } else {
+            this.legSelected = "R";
+            this.rightLeg.angle += pi;
+>>>>>>> 7a71387b4279ade1d4c8c0ec73a82d0e4ab40b47
         }
 
         this.collided = false;
@@ -161,4 +178,8 @@ Player.prototype.update = function() {
 
 
 
+<<<<<<< HEAD
 var player = new Player(400,200);
+=======
+var player = new Player(250,200);
+>>>>>>> 7a71387b4279ade1d4c8c0ec73a82d0e4ab40b47
