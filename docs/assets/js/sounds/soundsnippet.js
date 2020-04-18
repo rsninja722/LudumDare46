@@ -62,7 +62,7 @@ class SoundSnippet {
      * Get the sound length in seconds
      */
     getLengthSeconds() {
-        return 0;
+        return this.audio.duration;
     }
 
     /**
