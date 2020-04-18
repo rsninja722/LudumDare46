@@ -11,6 +11,9 @@ class Player {
         this.rightLeg = new Leg(this.hipRight.x, this.hipRight.y, 50, Math.PI/2);
         this.legSelected = "R";
         this.shouldMoveLeg = true;
+        this.collided = false;
+        this.lastBodyX = x;
+        this.lastBodyY = y;
     }
 
     
@@ -43,12 +46,33 @@ Player.prototype.moveLeg = function(){
     var curLeg = this.getActiveLeg();
     var target = mousePos;
 
-    // move selected leg towards mouse
-   
+    // Last leg position
+    var lastX = curLeg.x2;
+    var lastY = curLeg.y2;
+
     // var angle = turn(pointTo(curLeg,{x:curLeg.x2,y:curLeg.y2}),pointTo(curLeg,target),0.1);
     var angle = pointTo(curLeg,target);
+    
     curLeg.x2 = curLeg.x + curLeg.len * Math.cos(angle);
     curLeg.y2 = curLeg.y + curLeg.len * Math.sin(angle);
+
+    console.log(this.legSelected);
+    debugger
+    // Collision
+    if(collidingWithWorld({x:curLeg.x2,y:curLeg.y2,w:4,h:4})){
+        this.collided = true;
+        curLeg.x2 = lastX;
+        curLeg.y2 = lastY;
+        return 0;
+       
+    }
+    
+    
+    if(collidingWithWorld({x:this.x, y:this.y, w:this.w, h:this.h})){
+        this.x = this.lastBodyX;
+        this.y = this.lastBodyY;
+    }
+
 
     if(dist(curLeg,target) > curLeg.len) {
         // move towards mouse
@@ -57,6 +81,7 @@ Player.prototype.moveLeg = function(){
         this.y += Math.sin(angle) * dist(curLeg,target)/50;
         this.updateHips();
     }
+
     // if leg is right update it accordingly
     if(this.legSelected === "R") {
         // set angle to the locked foot to the locked hip
@@ -93,6 +118,13 @@ Player.prototype.moveLeg = function(){
         curLeg.x = this.hipRight.x;
         curLeg.y = this.hipRight.y;
     }
+
+    
+
+
+
+    this.lastBodyX = this.x;
+    this.lastBodyY = this.y;
 }
 
 Player.prototype.updateHips = function() {
@@ -110,15 +142,23 @@ Player.prototype.draw = function() {
 Player.prototype.update = function() {
     this.moveLeg();
     var curLeg = this.getActiveLeg();
-    if(collidingWithWorld({x:curLeg.x2,y:curLeg.y2,w:4,h:4})||mousePress[0]){
+    if(mousePress[0] || this.collided){//collidingWithWorld({x:curLeg.x2,y:curLeg.y2,w:4,h:4})||
         if(this.legSelected === "R"){
             this.legSelected = "L";
+            this.lastFootX = this.leftLeg.x2;
+            this.lastFootX = this.leftLeg.y2;
         } else {
             this.legSelected = "R";
+            this.lastFootX = this.rightLeg.x2;
+            this.lastFootX = this.rightLeg.x2;
+
         }
+
+        this.collided = false;
+        
     }
 }
 
 
 
-var player = new Player(300,200);
+var player = new Player(400,200);
