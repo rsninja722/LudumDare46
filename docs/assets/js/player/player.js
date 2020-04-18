@@ -44,6 +44,9 @@ Player.prototype.update = function() {
                 this.rightLeg.angle += pi;
             }
             this.shouldMoveLeg = false;
+
+            // Play the footstep sound
+            soundAssets.footstep.play();
         }
     // deselect
     } else {
