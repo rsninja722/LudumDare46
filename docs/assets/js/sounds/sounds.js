@@ -12,12 +12,14 @@
 // A mapping of asset names to their files
 // This exists to give nicer names to files
 let soundAssetMap = {
-    "debug-ding":"./assets/sounds/debug-ding.mp3"
+    "debug-ding": "./assets/sounds/debug-ding.mp3",
+    "footstep":"./assets/sounds/footstep.mp3"
 }
 
 // All available sounds
 let soundAssets = {
-    debug_ding: new SoundSnippet("debug-ding", audioAssetType.sfx)
+    debug_ding: new SoundSnippet("debug-ding", audioAssetType.sfx),
+    footstep: new SoundSnippet("footstep", audioAssetType.sfx)
 }
 
 /**
