@@ -34,8 +34,8 @@ function drawEndUI() {
  */
 
 function respiratoryUI(x, y, width, height){
-    cartesianRect(x,y,width,height, "black");
-    cartesianRect(x,y+(height-breath/constants.lifeFuncs.breath.fullBreath*height), width, breath/constants.lifeFuncs.breath.fullBreath*height, "teal");
+    cartesianRect(x,y,width,height, "rgb("+noBreathTimer/180*255+","+0+","+0+")");
+    cartesianRect(x,y+(height-breath/constants.lifeFuncs.breath.fullBreath*height), width, breath/constants.lifeFuncs.breath.fullBreath*height, "rgb("+255+","+(255-fullBreathTimer/180*255)+","+(255-fullBreathTimer/180*255)+")");
 }
 
 /***
