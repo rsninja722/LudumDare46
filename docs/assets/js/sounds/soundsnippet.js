@@ -20,9 +20,6 @@ class SoundSnippet {
         // Read actual asset path
         this.assetPath = soundAssetMap[asset_name];
 
-        // Set up the audio object
-        this.audio = new Audio();
-
     }
 
     /**
@@ -32,10 +29,10 @@ class SoundSnippet {
     cache(callback) {
 
         // Set the audio SRC
-        this.audio.src = this.assetPath;
+        this.audio = new Howl({src:[this.assetPath]});
 
         // Create a callback for loading finished
-        this.audio.addEventListener("loadeddata", callback, true);
+        this.audio.once("load", callback);
     }
 
 

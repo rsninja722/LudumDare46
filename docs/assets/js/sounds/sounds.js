@@ -12,7 +12,7 @@
 // A mapping of asset names to their files
 // This exists to give nicer names to files
 let soundAssetMap = {
-    "debug-ding":"/assets/sounds/debug-ding.mp3"
+    "debug-ding":"./assets/sounds/debug-ding.mp3"
 }
 
 // All available sounds
