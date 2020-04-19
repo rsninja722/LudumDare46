@@ -2,9 +2,6 @@
 function drawTitleScreenUI() {
 }
 
-// UI for level transition
-function drawLevelTransitionUI() {
-}
 
 // UI for playing
 function drawPlayingUI() {

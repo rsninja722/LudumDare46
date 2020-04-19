@@ -259,7 +259,7 @@ function distanceToLineSegment(lx1, ly1, lx2, ly2, px, py) {
 
 
 
-var player = new Player(550,-70);
+var player = new Player(constants.player.defaultX, constants.player.defaultY);
 
 // why does this stop the legs from glitching on the first step???
 player.rightLeg.angle = -pointTo({ x: player.rightLeg.x2, y: player.rightLeg.y2 }, player.hipRight);

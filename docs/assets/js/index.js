@@ -66,13 +66,14 @@ function draw() {
 
     // Handle game state
     switch (globalState) {
+
         // title screen
         case globalStates.titleScreen:
             drawTitleScreen();
             break;
         // level transition
         case globalStates.levelTransition:
-
+            handleTransition();
             break;
         // playing
         case globalStates.playing:
