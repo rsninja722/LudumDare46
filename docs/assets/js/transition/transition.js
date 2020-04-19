@@ -6,7 +6,7 @@ function handleTransition(){
 
     // Calculates alpha until its zero
     if(currentAlpha > 0){
-        currentAlpha -= .005;
+        currentAlpha -= .5;
     }
 
 

@@ -16,7 +16,15 @@ images = [
     "tutArrow.png",
     "tutKeyZ.png",
     "tutKeyX.png",
-    "tutKeyC.png"
+    "tutKeyC.png",
+    "cereal.png",
+    "post.png",
+    "box.png",
+    "boxNoOutline.png",
+    "playerBody.png",
+    "playerLeg.png",
+    "playerArm.png",
+    "playerHead.png"
 ];
 
 audio = [
