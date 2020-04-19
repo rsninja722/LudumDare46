@@ -13,13 +13,16 @@
 // This exists to give nicer names to files
 let soundAssetMap = {
     "debug-ding": "./assets/sounds/debug-ding.mp3",
-    "footstep1":"./assets/sounds/footsteps/footstep1.mp3",
-    "footstep2":"./assets/sounds/footsteps/footstep2.mp3",
-    "footstep3":"./assets/sounds/footsteps/footstep3.mp3",
-    "footstep4":"./assets/sounds/footsteps/footstep4.mp3",
-    "footstep5":"./assets/sounds/footsteps/footstep5.mp3",
-    "footstep6":"./assets/sounds/footsteps/footstep6.mp3",
-    "heartbeat":"./assets/sounds/heartbeat.mp3"
+    "footstep1": "./assets/sounds/footsteps/footstep1.mp3",
+    "footstep2": "./assets/sounds/footsteps/footstep2.mp3",
+    "footstep3": "./assets/sounds/footsteps/footstep3.mp3",
+    "footstep4": "./assets/sounds/footsteps/footstep4.mp3",
+    "footstep5": "./assets/sounds/footsteps/footstep5.mp3",
+    "footstep6": "./assets/sounds/footsteps/footstep6.mp3",
+    "heartbeat": "./assets/sounds/heartbeat.mp3",
+    "inhale": "./assets/sounds/breathing/inhale.mp3",
+    "exhale": "./assets/sounds/breathing/exhale.mp3",
+    "cough":"./assets/sounds/cough.mp3"
 }
 
 // All available sounds
@@ -31,7 +34,10 @@ let soundAssets = {
     footstep4: new SoundSnippet("footstep4", audioAssetType.sfx),
     footstep5: new SoundSnippet("footstep5", audioAssetType.sfx),
     footstep6: new SoundSnippet("footstep6", audioAssetType.sfx),
-    heartbeat: new SoundSnippet("heartbeat", audioAssetType.sfx)
+    heartbeat: new SoundSnippet("heartbeat", audioAssetType.sfx),
+    inhale: new SoundSnippet("inhale", audioAssetType.sfx),
+    exhale: new SoundSnippet("exhale", audioAssetType.sfx),
+    cough: new SoundSnippet("cough", audioAssetType.sfx)
 }
 
 /**

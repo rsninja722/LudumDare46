@@ -4,10 +4,10 @@ class Player {
         this.y = y;
         this.w = constants.player.width;
         this.h = constants.player.height;
-        this.hipLeft = { x: this.x - constants.player.hip.offset_x, y: this.y + constants.player.hip.offset_y };
-        this.hipRight = { x: this.x + constants.player.hip.offset_x, y: this.y + constants.player.hip.offset_y };
-        this.leftLeg = new Leg(this.hipLeft.x, this.hipLeft.y, 50, -Math.PI / 4);
-        this.rightLeg = new Leg(this.hipRight.x, this.hipRight.y, 50, Math.PI / 2);
+        this.hipLeft = { x: this.x + constants.player.hip.offset_x, y: this.y + constants.player.hip.offset_y };
+        this.hipRight = { x: this.x - constants.player.hip.offset_x, y: this.y + constants.player.hip.offset_y };
+        this.leftLeg = new Leg(this.hipLeft.x, this.hipLeft.y, constants.player.leg_length, Math.PI*2.5);
+        this.rightLeg = new Leg(this.hipRight.x, this.hipRight.y, constants.player.leg_length, Math.PI*2.5);
         this.legSelected = "R";
         this.shouldMoveLeg = false;
         this.collided = false;
@@ -55,17 +55,8 @@ Player.prototype.update = function() {
         var targetPos = mousePosition();
         var curLeg = this.getActiveLeg();
         this.hover.active = false;
-        //left
-        if (distanceToLineSegment(this.leftLeg.x, this.leftLeg.y, this.leftLeg.x2, this.leftLeg.y2, targetPos.x, targetPos.y) < constants.player.select_range) {
-            this.hover.active = true;
-            this.hover.leg = "L";
-            if(mousePress[0]) {
-                this.shouldMoveLeg = true;
-                this.legSelected = "L";
-                this.hover.active = false;
-            }
         // right
-        } else if (distanceToLineSegment(this.rightLeg.x, this.rightLeg.y, this.rightLeg.x2, this.rightLeg.y2, targetPos.x, targetPos.y) < constants.player.select_range) {
+        if (distanceToLineSegment(this.rightLeg.x, this.rightLeg.y, this.rightLeg.x2, this.rightLeg.y2, targetPos.x, targetPos.y) < constants.player.select_range) {
             this.hover.active = true;
             this.hover.leg = "R";
             if(mousePress[0]) {
@@ -73,10 +64,46 @@ Player.prototype.update = function() {
                 this.legSelected = "R";
                 this.hover.active = false;
             }
-        }
+            //left
+        } else if (distanceToLineSegment(this.leftLeg.x, this.leftLeg.y, this.leftLeg.x2, this.leftLeg.y2, targetPos.x, targetPos.y) < constants.player.select_range) {
+            this.hover.active = true;
+            this.hover.leg = "L";
+            if(mousePress[0]) {
+                this.shouldMoveLeg = true;
+                this.legSelected = "L";
+                this.hover.active = false;
+            }
+        }  
     }
+
+    // god mode
+    // if(keyDown[k.w]) {
+    //     this.y-=5;
+    // }
+    // if(keyDown[k.s]) {
+    //     this.y+=5;
+    // }
+    // if(keyDown[k.a]) {
+    //     this.x-=5;
+    // }
+    // if(keyDown[k.d]) {
+    //     this.x+=5;
+    // }
     
     centerCameraOn(this.x,this.y);
+    // camera limits
+    if(camera.x > 898) {
+        camera.x = 898;
+    }
+    if(camera.x < -98) {
+        camera.x = -98;
+    }
+    if(camera.y < 245) {
+        camera.y = 245;
+    }
+    if(camera.y > 350) {
+        camera.y = 350;
+    }
 }
 
 
@@ -98,7 +125,6 @@ Player.prototype.moveLeg = function(){
     // console.log(curLeg.angle.toPrecision(5),pointTo(curLeg,target).toPrecision(5));
     var angleDif = turn(curLeg.angle, pointTo(curLeg, target), constants.player.leg_speed) - curLeg.angle;
     curLeg.angle += angleDif;
-    // var angle = pointTo(curLeg,target);
     curLeg.x2 = curLeg.x + curLeg.len * Math.cos(curLeg.angle);
     curLeg.y2 = curLeg.y + curLeg.len * Math.sin(curLeg.angle);
 
@@ -109,15 +135,26 @@ Player.prototype.moveLeg = function(){
         curLeg.x2 = lastX;
         curLeg.y2 = lastY;
         curLeg.angle -= angleDif;
+
+        // finer movement
+        angleDif = turn(curLeg.angle, pointTo(curLeg, target), constants.player.leg_speed/8) - curLeg.angle;
+        curLeg.angle += angleDif;
+        curLeg.x2 = curLeg.x + curLeg.len * Math.cos(curLeg.angle);
+        curLeg.y2 = curLeg.y + curLeg.len * Math.sin(curLeg.angle);
+
+
+        // Collision
+        if(collidingWithWorld({x:curLeg.x2,y:curLeg.y2,w:2,h:2})){
+            this.collided = true;
+            curLeg.x2 = lastX;
+            curLeg.y2 = lastY;
+            curLeg.angle -= angleDif;
+        }
         return 0;
-       
     }
     
     
-    if(collidingWithWorld({x:this.x, y:this.y, w:this.w, h:this.h})){
-        this.x = this.lastBodyX;
-        this.y = this.lastBodyY;
-    }
+    
 
 
     if (dist(curLeg, target) > curLeg.len) {
@@ -169,7 +206,10 @@ Player.prototype.moveLeg = function(){
     }
 
     
-
+    if(collidingWithWorld({x:this.x, y:this.y, w:this.w, h:this.h})){
+        this.x = this.lastBodyX;
+        this.y = this.lastBodyY;
+    }
 
 
     this.lastBodyX = this.x;
@@ -248,3 +288,7 @@ function distanceToLineSegment(lx1, ly1, lx2, ly2, px, py) {
 
 var player = new Player(constants.player.defaultX, constants.player.defaultY);
 
+// why does this stop the legs from glitching on the first step???
+player.rightLeg.angle = -pointTo({ x: player.rightLeg.x2, y: player.rightLeg.y2 }, player.hipRight);
+player.leftLeg.angle = pointTo({ x: player.leftLeg.x2, y: player.leftLeg.y2 }, player.hipLeft);
+player.moveLeg();

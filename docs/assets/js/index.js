@@ -5,7 +5,18 @@ page_preloader.show(true);
 images = [
     "assets/images/",
     "level.png",
-    "level_2.png"
+    "epic.png",
+    "heartCover.png",
+    "heartBack.png",
+    "blinkOverlay.png",
+    "eye.png",
+    "eyeDry.png",
+    "tutSelect0.png",
+    "tutSelect1.png",
+    "tutArrow.png",
+    "tutKeyZ.png",
+    "tutKeyX.png",
+    "tutKeyC.png"
 ];
 
 audio = [
@@ -73,10 +84,7 @@ function draw() {
             break;
         // playing
         case globalStates.playing:
-            camera.zoom = 1;
-            drawWorldBlocks();
-            imgIgnoreCutoff(sprites.level_2,0,0,0,4,4);
-            player.draw();
+            drawPlaying();
             break;
         // paused
         case globalStates.paused:
@@ -88,7 +96,7 @@ function draw() {
             break;
         //building - to be used only in development
         case globalStates.building:
-            
+            imgIgnoreCutoff(sprites.epic,0,0);
             buildDraw();
             break;
     }

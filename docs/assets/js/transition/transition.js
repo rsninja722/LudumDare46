@@ -24,7 +24,7 @@ function drawLevelTransitionUI() {
 
     // draws background sprites
     drawWorldBlocks();
-    imgIgnoreCutoff(sprites.level_2,0,0,0,4,4);
+    imgIgnoreCutoff(sprites.epic,0,0);
     player.draw();
 
     // sets alpha to calculated alpha for black

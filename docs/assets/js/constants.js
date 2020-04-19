@@ -37,25 +37,30 @@ var constants = {
     },
     lifeFuncs:{
         breath:{
-            fullBreath: 200
+            fullBreath: 200,
+            cough_interval_secs: 4.0
         },
         cardio:{
             optimalPressure: 50
+        },
+        blink: {
+            dryTime: 600
         }
     },
     player:{
         leg_speed: 0.1,
         movement_divider: 50,
         max_movement_speed: 3,
-        width: 30,
-        height: 50,
+        width: 40,
+        height: 75,
         select_range: 10,
+        leg_length: 75,
         hip: {
-            offset_x: 15,
-            offset_y: 25
+            offset_x: 20,
+            offset_y: 35
         },
-        defaultX: 500,
-        defaultY: -70
+        defaultX: 600,
+        defaultY: -170
     }
 
 };
