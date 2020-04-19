@@ -24,7 +24,7 @@ function handleTitleScreen(){
 function handleMainScreen(){
     if(timer > 20){
         if(rectpoint({x:415, y:200, w: 300, h: 50}, {x:cursor.x, y:cursor.y}) && mouseDown[0]){
-            globalState = globalStates.playing;
+            globalState = globalStates.levelTransition;
             timer = 0;
         }
         if(rectpoint({x:415, y:550, w: 300, h: 50}, {x:cursor.x, y:cursor.y}) && mouseDown[0]){
