@@ -5,7 +5,12 @@ page_preloader.show(true);
 images = [
     "assets/images/",
     "level.png",
-    "level_2.png"
+    "level_2.png",
+    "heartCover.png",
+    "heartBack.png",
+    "blinkOverlay.png",
+    "eye.png",
+    "eyeDry.png"
 ];
 
 audio = [
@@ -72,10 +77,17 @@ function draw() {
             break;
         // playing
         case globalStates.playing:
-            camera.zoom = 1;
-            drawWorldBlocks();
-            imgIgnoreCutoff(sprites.level_2,0,0,0,4,4);
-            player.draw();
+            if(!justBlinked) {
+
+                camera.zoom = 1;
+                drawWorldBlocks();
+                imgIgnoreCutoff(sprites.level_2,0,0,0,4,4);
+                player.draw();
+
+            } else {
+                rect(-camera.x - difx + cw/2,-camera.y - dify + ch/2,cw,ch,"black");
+                justBlinked = false;
+            }
             break;
         // paused
         case globalStates.paused:

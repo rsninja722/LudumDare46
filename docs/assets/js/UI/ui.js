@@ -13,6 +13,9 @@ function drawPlayingUI() {
 
     //Respiration Monitor
     respiratoryUI(cw/8*5,ch/8*7-8, cw/16, ch/8);
+
+    //Blink eye and overlay
+    blinkUI();
 }
 
 //UI for pause screen
@@ -75,7 +78,16 @@ function heartBeatUI(x, y, width, height){
     }
 
     //Backdrop
-    rect(x+width/2,y+height/2,width,height,"black");
+    var BackdropColor;
+    if(pressure > 42 && pressure < 60) {
+        BackdropColor = "#0c2605";
+    } else if(pressure > 28 && pressure < 75) {
+        BackdropColor = "#2b2b06";
+    } else {
+        BackdropColor = "#260505";
+    }
+    rect(x+width/2,y+height/2,width,height,BackdropColor);
+    img(sprites.heartBack,cw-107,ch-46);
 
     //Pressure Meter
     rect(x+width-8,y+height/2,16,height,"red");
@@ -90,6 +102,9 @@ function heartBeatUI(x, y, width, height){
         const qrsValueAtNextPosition = heartBeatHistory[index+1];
         line(x+(index*(width-16)/heartBeatHistory.length), y+(2*height/3)+(qrsValueAtPosition*(width-16)/heartBeatHistory.length), x+((index+1)*(width-16)/heartBeatHistory.length), y+(2*height/3)+(qrsValueAtNextPosition*(width-16)/heartBeatHistory.length),Math.min(3,Math.max(3/beatTimeElapsed,1)), "red");
     }
+
+    // cover
+    img(sprites.heartCover,cw-107,ch-46);
 }
 
 //Determine next value to be added to the graph
@@ -125,4 +140,22 @@ function pushNextBeatValue(){
     }
 
     heartBeatHistory.push(nextBeatValue);
+}
+
+
+function blinkUI() {
+    // eye
+    img(sprites.eye,cw-350,ch-40,0,2,2);
+    var alpha = clamp(eyeDryness / constants.lifeFuncs.blink.dryTime,0,1);
+    curCtx.globalAlpha = alpha;
+    img(sprites.eyeDry,cw-350,ch-40,0,2,2);
+
+    // dry overlay
+    if(eyeDryness > constants.lifeFuncs.blink.dryTime) {
+        alpha = (eyeDryness - constants.lifeFuncs.blink.dryTime) / 350;
+        curCtx.globalAlpha = alpha;
+        img(sprites.blinkOverlay,cw/2,ch/2);
+    }
+
+    curCtx.globalAlpha = 1;
 }

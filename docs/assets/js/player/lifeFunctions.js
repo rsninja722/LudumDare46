@@ -13,24 +13,31 @@ var breathMode = {
 
 let currentBreathMode = breathMode.exhale;
 
-
+let eyeDryness = 0;
+let justBlinked = false;
 
 function updateLife() {
     
-    if(keyDown[k.z]) {
+    if(keyDown[k.x]) {
         if(breath === 0) currentBreathMode = breathMode.inhale;
         else if(breath === constants.lifeFuncs.breath.fullBreath) currentBreathMode = breathMode.exhale;
     }
 
     breathe();
 
-    if(keyPress[k.x]) {
+    if(keyPress[k.c]) {
         heartbeat();
     }
 
     pressure-=0.1;
     if(pressure<=0){
         pressure = 0;
+    }
+
+    eyeDryness++;
+
+    if(keyPress[k.z]) {
+        blink();
     }
 };
 
@@ -73,3 +80,8 @@ function heartbeat() {
     // Play the heartbeat sound
     soundAssets.heartbeat.play();
 };
+
+function blink() {
+    eyeDryness = 0;
+    justBlinked = true;
+}
