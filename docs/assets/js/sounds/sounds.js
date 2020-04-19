@@ -13,13 +13,32 @@
 // This exists to give nicer names to files
 let soundAssetMap = {
     "debug-ding": "./assets/sounds/debug-ding.mp3",
-    "footstep":"./assets/sounds/footstep.mp3"
+    "footstep1":"./assets/sounds/footsteps/footstep1.mp3",
+    "footstep2":"./assets/sounds/footsteps/footstep2.mp3",
+    "footstep3":"./assets/sounds/footsteps/footstep3.mp3",
+    "footstep4":"./assets/sounds/footsteps/footstep4.mp3",
+    "footstep5":"./assets/sounds/footsteps/footstep5.mp3",
+    "footstep6":"./assets/sounds/footsteps/footstep6.mp3"
 }
 
 // All available sounds
 let soundAssets = {
     debug_ding: new SoundSnippet("debug-ding", audioAssetType.sfx),
-    footstep: new SoundSnippet("footstep", audioAssetType.sfx)
+    footstep1: new SoundSnippet("footstep1", audioAssetType.sfx),
+    footstep2: new SoundSnippet("footstep2", audioAssetType.sfx),
+    footstep3: new SoundSnippet("footstep3", audioAssetType.sfx),
+    footstep4: new SoundSnippet("footstep4", audioAssetType.sfx),
+    footstep5: new SoundSnippet("footstep5", audioAssetType.sfx),
+    footstep6: new SoundSnippet("footstep6", audioAssetType.sfx)
+}
+
+/**
+ * Play a random footstep sound because ReAlIsM
+ */
+function playRandomFootstep() {
+
+    // There has to be a one-liner somewhere in the game...
+    [soundAssets.footstep1, soundAssets.footstep2, soundAssets.footstep3, soundAssets.footstep4, soundAssets.footstep5, soundAssets.footstep6][Math.floor(Math.random() * Object.keys(soundAssets).length - 1)].play();
 }
 
 /**

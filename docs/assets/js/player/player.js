@@ -47,7 +47,7 @@ Player.prototype.update = function() {
             this.shouldMoveLeg = false;
 
             // Play the footstep sound
-            soundAssets.footstep.play();
+            playRandomFootstep();
         }
     // deselect
     } else {
