@@ -3,7 +3,9 @@ var page_preloader = new Preloader();
 page_preloader.show(true);
 
 images = [
-    ""
+    "assets/images/",
+    "level.png",
+    "level_2.png"
 ];
 
 audio = [
@@ -18,13 +20,14 @@ var globalStates = {
     end: 4,
     building: 5
 };
-var globalState = globalStates.playing;
+var globalState = globalStates.titleScreen;
 
 function update() {
+        
     switch (globalState) {
         // title screen
         case globalStates.titleScreen:
-
+            handleTitleScreen();
             break;
         // level transition
         case globalStates.levelTransition:
@@ -60,7 +63,7 @@ function draw() {
     switch (globalState) {
         // title screen
         case globalStates.titleScreen:
-
+            drawTitleScreen();
             break;
         // level transition
         case globalStates.levelTransition:
@@ -68,8 +71,9 @@ function draw() {
             break;
         // playing
         case globalStates.playing:
-            camera.zoom = 2;
+            camera.zoom = 1;
             drawWorldBlocks();
+            imgIgnoreCutoff(sprites.level_2,0,0,0,4,4);
             player.draw();
             break;
         // paused
@@ -82,6 +86,7 @@ function draw() {
             break;
         //building - to be used only in development
         case globalStates.building:
+            
             buildDraw();
             break;
     }

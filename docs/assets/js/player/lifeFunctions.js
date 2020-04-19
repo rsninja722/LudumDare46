@@ -69,4 +69,7 @@ function heartbeat() {
         pressure = 100;
     }
     heartBeat = true;
+
+    // Play the heartbeat sound
+    soundAssets.heartbeat.play();
 };
