@@ -37,8 +37,14 @@ let soundAssets = {
  */
 function playRandomFootstep() {
 
-    // There has to be a one-liner somewhere in the game...
-    [soundAssets.footstep1, soundAssets.footstep2, soundAssets.footstep3, soundAssets.footstep4, soundAssets.footstep5, soundAssets.footstep6][Math.min(Math.floor(Math.random() * Object.keys(soundAssets).length - 1), Object.keys(soundAssets).length - 1)].play();
+    // Build a list of footsteps
+    let step_sounds = [soundAssets.footstep1, soundAssets.footstep2, soundAssets.footstep3, soundAssets.footstep4, soundAssets.footstep5, soundAssets.footstep6];
+
+    // Choose a random footstep
+    let footstep_id = Math.floor(Math.random() * step_sounds.length);
+
+    // Play the sound
+    step_sounds[footstep_id].play();
 }
 
 /**
