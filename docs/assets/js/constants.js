@@ -41,6 +41,9 @@ var constants = {
         },
         cardio:{
             optimalPressure: 50
+        },
+        blink: {
+            dryTime: 600
         }
     },
     player:{
