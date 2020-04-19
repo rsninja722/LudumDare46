@@ -5,7 +5,7 @@ page_preloader.show(true);
 images = [
     "assets/images/",
     "level.png",
-    "level_2.png",
+    "epic.png",
     "heartCover.png",
     "heartBack.png",
     "blinkOverlay.png",
@@ -80,8 +80,8 @@ function draw() {
             if(!justBlinked) {
 
                 camera.zoom = 1;
+                imgIgnoreCutoff(sprites.epic,0,0);
                 drawWorldBlocks();
-                imgIgnoreCutoff(sprites.level_2,0,0,0,4,4);
                 player.draw();
 
             } else {
@@ -99,7 +99,7 @@ function draw() {
             break;
         //building - to be used only in development
         case globalStates.building:
-            
+            imgIgnoreCutoff(sprites.epic,0,0);
             buildDraw();
             break;
     }

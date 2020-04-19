@@ -50,15 +50,16 @@ var constants = {
         leg_speed: 0.1,
         movement_divider: 50,
         max_movement_speed: 3,
-        width: 30,
-        height: 50,
+        width: 40,
+        height: 75,
         select_range: 10,
+        leg_length: 75,
         hip: {
-            offset_x: 15,
-            offset_y: 25
+            offset_x: 20,
+            offset_y: 35
         },
         defaultX: 500,
-        defaultY: -70
+        defaultY: -170
     }
 
 };
