@@ -42,7 +42,7 @@ function update() {
             break;
         // level transition
         case globalStates.levelTransition:
-
+            handleTransition();
             break;
         // playing
         case globalStates.playing:
@@ -79,7 +79,8 @@ function draw() {
             break;
         // level transition
         case globalStates.levelTransition:
-            handleTransition();
+            
+            drawLevelTransitionUI();
             break;
         // playing
         case globalStates.playing:
@@ -109,7 +110,6 @@ function absoluteDraw() {
             break;
         // level transition
         case globalStates.levelTransition:
-            drawLevelTransitionUI();
             break;
         // playing
         case globalStates.playing:

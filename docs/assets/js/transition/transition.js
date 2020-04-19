@@ -10,6 +10,20 @@ function handleTransition(){
     }
 
 
+    centerCameraOn(constants.player.defaultX, constants.player.defaultY);
+
+    if(camera.x > 898) {
+        camera.x = 898;
+    }
+    if(camera.x < -98) {
+        camera.x = -98;
+    }
+    if(camera.y < 245) {
+        camera.y = 245;
+    }
+    if(camera.y > 350) {
+        camera.y = 350;
+    }
 }
 
 
@@ -17,7 +31,7 @@ function handleTransition(){
 function drawLevelTransitionUI() { 
 
     // centers camera on player
-    centerCameraOn(constants.player.defaultX, constants.player.defaultY);
+    
 
     // sets alpha for background drawing
     canvases.ctx.globalAlpha = 1;
@@ -39,4 +53,5 @@ function drawLevelTransitionUI() {
 
     // resets alpha for rest of drawing
     canvases.ctx.globalAlpha = 1;
+    
 }
