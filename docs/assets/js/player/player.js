@@ -246,5 +246,5 @@ function distanceToLineSegment(lx1, ly1, lx2, ly2, px, py) {
 
 
 
-var player = new Player(500,-100);
+var player = new Player(500,-70);
 
