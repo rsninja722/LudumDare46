@@ -103,6 +103,8 @@ function drawTitleScreen(){
         rect(395, 550, 140, 50, "green");
         text("Back", 345, 535, "white", 5, 150);
 
+        text("*Names are links to their pages", 705, 495, "green", 2, 100);
+
     }
 
 
