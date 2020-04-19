@@ -6,8 +6,8 @@ class Player {
         this.h = constants.player.height;
         this.hipLeft = { x: this.x + constants.player.hip.offset_x, y: this.y + constants.player.hip.offset_y };
         this.hipRight = { x: this.x - constants.player.hip.offset_x, y: this.y + constants.player.hip.offset_y };
-        this.leftLeg = new Leg(this.hipLeft.x, this.hipLeft.y, 50, Math.PI*2.5);
-        this.rightLeg = new Leg(this.hipRight.x, this.hipRight.y, 50, Math.PI*2.5);
+        this.leftLeg = new Leg(this.hipLeft.x, this.hipLeft.y, constants.player.leg_length, Math.PI*2.5);
+        this.rightLeg = new Leg(this.hipRight.x, this.hipRight.y, constants.player.leg_length, Math.PI*2.5);
         this.legSelected = "R";
         this.shouldMoveLeg = false;
         this.collided = false;
@@ -75,8 +75,35 @@ Player.prototype.update = function() {
             }
         }  
     }
+
+    // god mode
+    // if(keyDown[k.w]) {
+    //     this.y-=5;
+    // }
+    // if(keyDown[k.s]) {
+    //     this.y+=5;
+    // }
+    // if(keyDown[k.a]) {
+    //     this.x-=5;
+    // }
+    // if(keyDown[k.d]) {
+    //     this.x+=5;
+    // }
     
     centerCameraOn(this.x,this.y);
+    // camera limits
+    if(camera.x > 898) {
+        camera.x = 898;
+    }
+    if(camera.x < -98) {
+        camera.x = -98;
+    }
+    if(camera.y < 245) {
+        camera.y = 245;
+    }
+    if(camera.y > 350) {
+        camera.y = 350;
+    }
 }
 
 
