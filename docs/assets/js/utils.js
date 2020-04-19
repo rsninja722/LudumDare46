@@ -3,6 +3,10 @@ function clamp(value, min, max) {
     return Math.min(max, Math.max(min, value));
 }
 
+function getCurrentTimeSeconds() {
+    return new Date().getTime() / 1000;
+}
+
 // linear interpolation towards somewhere
 function lerp(start, end, amt) { return (1 - amt) * start + amt * end; }
 

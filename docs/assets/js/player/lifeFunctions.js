@@ -19,8 +19,14 @@ let justBlinked = false;
 function updateLife() {
     
     if(keyDown[k.x]) {
-        if(breath === 0) currentBreathMode = breathMode.inhale;
-        else if(breath === constants.lifeFuncs.breath.fullBreath) currentBreathMode = breathMode.exhale;
+        if (breath === 0) {
+            soundAssets.inhale.play();
+            currentBreathMode = breathMode.inhale;
+        }
+        else if (breath === constants.lifeFuncs.breath.fullBreath) {
+            soundAssets.exhale.play();
+            currentBreathMode = breathMode.exhale;
+        }
     }
 
     breathe();
@@ -50,6 +56,7 @@ function breathe() {
                 fullBreathTimer++;
                 if(fullBreathTimer >= 600) {
                     //cough and lose breath or something
+                    handleCough();
                 }
             } else {
                 fullBreathTimer = 0;
@@ -62,6 +69,7 @@ function breathe() {
                 noBreathTimer++;
                 if(noBreathTimer >= 300) {
                     //cough and lose breath or something
+                    handleCough();
                 }
             } else {
                 noBreathTimer = 0;
@@ -69,6 +77,27 @@ function breathe() {
             break;
     }
 };
+
+// Tracker for if we are currently coughing
+let _nextCoughAllowedTime = 0;
+
+/**
+ * Handle player coughing without spamming the sound buffer
+ */
+function handleCough() {
+
+    // Only cough if we are past the cough time
+    if (getCurrentTimeSeconds() >= _nextCoughAllowedTime) {
+
+        console.log("[LifeFunctions] Coughing")
+        
+        // Set the next allowed cough time
+        _nextCoughAllowedTime = getCurrentTimeSeconds() + constants.lifeFuncs.breath.cough_interval_secs;
+
+        // Play the cough audio
+        soundAssets.cough.play();
+    }
+}
 
 function heartbeat() {
     pressure+=10;
