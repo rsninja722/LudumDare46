@@ -10,7 +10,13 @@ images = [
     "heartBack.png",
     "blinkOverlay.png",
     "eye.png",
-    "eyeDry.png"
+    "eyeDry.png",
+    "tutSelect0.png",
+    "tutSelect1.png",
+    "tutArrow.png",
+    "tutKeyZ.png",
+    "tutKeyX.png",
+    "tutKeyC.png"
 ];
 
 audio = [
@@ -77,17 +83,7 @@ function draw() {
             break;
         // playing
         case globalStates.playing:
-            if(!justBlinked) {
-
-                camera.zoom = 1;
-                imgIgnoreCutoff(sprites.epic,0,0);
-                drawWorldBlocks();
-                player.draw();
-
-            } else {
-                rect(-camera.x - difx + cw/2,-camera.y - dify + ch/2,cw,ch,"black");
-                justBlinked = false;
-            }
+            drawPlaying();
             break;
         // paused
         case globalStates.paused:
