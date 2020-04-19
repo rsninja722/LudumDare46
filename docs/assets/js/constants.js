@@ -12,6 +12,7 @@ var constants = {
                 bg_color: "#242424",
                 text_color: "#ffffff",
                 canvas_border: "rgb(63, 63, 63)",
+                canvas_bg: "darkslategray",
                 loading_animation_color: "#ff4136"
             },
 

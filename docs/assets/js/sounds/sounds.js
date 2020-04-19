@@ -18,7 +18,8 @@ let soundAssetMap = {
     "footstep3":"./assets/sounds/footsteps/footstep3.mp3",
     "footstep4":"./assets/sounds/footsteps/footstep4.mp3",
     "footstep5":"./assets/sounds/footsteps/footstep5.mp3",
-    "footstep6":"./assets/sounds/footsteps/footstep6.mp3"
+    "footstep6":"./assets/sounds/footsteps/footstep6.mp3",
+    "heartbeat":"./assets/sounds/heartbeat.mp3"
 }
 
 // All available sounds
@@ -29,7 +30,8 @@ let soundAssets = {
     footstep3: new SoundSnippet("footstep3", audioAssetType.sfx),
     footstep4: new SoundSnippet("footstep4", audioAssetType.sfx),
     footstep5: new SoundSnippet("footstep5", audioAssetType.sfx),
-    footstep6: new SoundSnippet("footstep6", audioAssetType.sfx)
+    footstep6: new SoundSnippet("footstep6", audioAssetType.sfx),
+    heartbeat: new SoundSnippet("heartbeat", audioAssetType.sfx)
 }
 
 /**
