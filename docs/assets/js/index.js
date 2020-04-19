@@ -75,7 +75,7 @@ function draw() {
 
         // title screen
         case globalStates.titleScreen:
-            drawTitleScreen();
+            
             break;
         // level transition
         case globalStates.levelTransition:
@@ -107,6 +107,7 @@ function absoluteDraw() {
         // title screen
         case globalStates.titleScreen:
             drawTitleScreenUI();
+            drawTitleScreen();
             break;
         // level transition
         case globalStates.levelTransition:
