@@ -53,7 +53,9 @@ var constants = {
         hip: {
             offset_x: 15,
             offset_y: 25
-        }
+        },
+        defaultX: 500,
+        defaultY: -70
     }
 
 };
