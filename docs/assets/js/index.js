@@ -21,7 +21,7 @@ var globalStates = {
     building: 5
 };
 var globalState = globalStates.titleScreen;
-debugger
+
 function update() {
         
     switch (globalState) {
