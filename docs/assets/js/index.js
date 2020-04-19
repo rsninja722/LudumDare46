@@ -21,7 +21,7 @@ var globalStates = {
     building: 5
 };
 var globalState = globalStates.titleScreen;
-
+debugger
 function update() {
         
     switch (globalState) {
@@ -31,7 +31,7 @@ function update() {
             break;
         // level transition
         case globalStates.levelTransition:
-
+            handleTransition();
             break;
         // playing
         case globalStates.playing:
@@ -68,7 +68,8 @@ function draw() {
             break;
         // level transition
         case globalStates.levelTransition:
-            handleTransition();
+            
+            drawLevelTransitionUI();
             break;
         // playing
         case globalStates.playing:
@@ -101,7 +102,6 @@ function absoluteDraw() {
             break;
         // level transition
         case globalStates.levelTransition:
-            drawLevelTransitionUI();
             break;
         // playing
         case globalStates.playing:
