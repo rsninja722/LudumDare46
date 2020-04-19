@@ -37,7 +37,8 @@ var constants = {
     },
     lifeFuncs:{
         breath:{
-            fullBreath: 200
+            fullBreath: 200,
+            cough_interval_secs: 4.0
         },
         cardio:{
             optimalPressure: 50
