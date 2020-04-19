@@ -41,7 +41,10 @@ class SoundSnippet {
         this.audio = new Howl({src:[this.assetPath]});
 
         // Create a callback for loading finished
-        this.audio.once("load", callback);
+        this.audio.once("load", () => {
+            console.log(`[SoundSnippet] Loaded asset: ${this.asset_name}`);
+            callback();
+        });
 
         // Configure a thread for updating the clip volume
         setInterval(() => {
