@@ -4,7 +4,8 @@ page_preloader.show(true);
 
 images = [
     "assets/images/",
-    "level.png"
+    "level.png",
+    "level_2.png"
 ];
 
 audio = [
@@ -72,6 +73,7 @@ function draw() {
         case globalStates.playing:
             camera.zoom = 1;
             drawWorldBlocks();
+            imgIgnoreCutoff(sprites.level_2,0,0,0,4,4);
             player.draw();
             break;
         // paused
@@ -84,7 +86,7 @@ function draw() {
             break;
         //building - to be used only in development
         case globalStates.building:
-            imgIgnoreCutoff(sprites.level,0,0);
+            
             buildDraw();
             break;
     }

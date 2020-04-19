@@ -96,17 +96,19 @@ Player.prototype.moveLeg = function(){
     // move selected leg towards mouse
 
     // console.log(curLeg.angle.toPrecision(5),pointTo(curLeg,target).toPrecision(5));
-    curLeg.angle = turn(curLeg.angle, pointTo(curLeg, target), constants.player.leg_speed);
+    var angleDif = turn(curLeg.angle, pointTo(curLeg, target), constants.player.leg_speed) - curLeg.angle;
+    curLeg.angle += angleDif;
     // var angle = pointTo(curLeg,target);
     curLeg.x2 = curLeg.x + curLeg.len * Math.cos(curLeg.angle);
     curLeg.y2 = curLeg.y + curLeg.len * Math.sin(curLeg.angle);
 
 
     // Collision
-    if(collidingWithWorld({x:curLeg.x2,y:curLeg.y2,w:4,h:4})){
+    if(collidingWithWorld({x:curLeg.x2,y:curLeg.y2,w:2,h:2})){
         this.collided = true;
         curLeg.x2 = lastX;
         curLeg.y2 = lastY;
+        curLeg.angle -= angleDif;
         return 0;
        
     }
