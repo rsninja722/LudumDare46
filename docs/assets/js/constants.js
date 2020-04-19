@@ -41,6 +41,9 @@ var constants = {
         },
         cardio:{
             optimalPressure: 50
+        },
+        blink: {
+            dryTime: 600
         }
     },
     player:{
@@ -53,7 +56,9 @@ var constants = {
         hip: {
             offset_x: 15,
             offset_y: 25
-        }
+        },
+        defaultX: 500,
+        defaultY: -70
     }
 
 };
