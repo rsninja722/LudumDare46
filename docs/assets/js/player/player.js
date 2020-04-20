@@ -69,9 +69,12 @@ Player.prototype.update = function() {
        
         var targetPos = mousePosition();
         var curLeg = this.getActiveLeg();
-        this.hover.active = false;
+        
         // right
         if (distanceToLineSegment(this.rightLeg.x, this.rightLeg.y, this.rightLeg.x2, this.rightLeg.y2, targetPos.x, targetPos.y) < constants.player.select_range) {
+            if(this.hover.active === false) {
+                soundAssets.hover.play();
+            }
             this.hover.active = true;
             this.hover.leg = "R";
             if(mousePress[0]) {
@@ -81,6 +84,9 @@ Player.prototype.update = function() {
             }
             //left
         } else if (distanceToLineSegment(this.leftLeg.x, this.leftLeg.y, this.leftLeg.x2, this.leftLeg.y2, targetPos.x, targetPos.y) < constants.player.select_range) {
+            if(this.hover.active === false) {
+                soundAssets.hover.play();
+            }
             this.hover.active = true;
             this.hover.leg = "L";
             if(mousePress[0]) {
@@ -88,7 +94,9 @@ Player.prototype.update = function() {
                 this.legSelected = "L";
                 this.hover.active = false;
             }
-        }  
+        } else {
+            this.hover.active = false;
+        }
     }
 
     // place box

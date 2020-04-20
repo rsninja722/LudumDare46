@@ -89,7 +89,6 @@ function update() {
 }
 
 function draw() {
-
     // If draw is being called, the user has interacted with the page at least once.
     // This signal can be used to notify the audio permission handler
     unlockAudioPermission();

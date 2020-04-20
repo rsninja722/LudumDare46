@@ -18,6 +18,7 @@ Objective.prototype.update = function() {
         for(var j=0;j<50;j++) {
             Particles.push(new Particle(this.x,this.y));
         }
+        soundAssets.pickUp.play();
         this.callback();
         return true;
     }

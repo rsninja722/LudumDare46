@@ -25,6 +25,8 @@ let soundAssetMap = {
     "cough": "./assets/sounds/cough.mp3",
     "dead": "./assets/sounds/dead.mp3",
     "click": "./assets/sounds/click.mp3",
+    "hover": "./assets/sounds/hover.wav",
+    "pickUp": "./assets/sounds/pickUp.wav",
     "backingtrack": "./assets/sounds/backingtrack.wav"
 }
 
@@ -43,6 +45,8 @@ let soundAssets = {
     cough: new SoundSnippet("cough", audioAssetType.sfx),
     dead: new SoundSnippet("dead", audioAssetType.sfx),
     click: new SoundSnippet("click", audioAssetType.sfx),
+    hover: new SoundSnippet("hover", audioAssetType.sfx),
+    pickUp: new SoundSnippet("pickUp", audioAssetType.sfx),
     backingtrack: new SoundSnippet("backingtrack", audioAssetType.bgm)
 }
 
