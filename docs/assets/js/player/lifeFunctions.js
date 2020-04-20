@@ -19,14 +19,16 @@ let justBlinked = false;
 function updateLife() {
 
     if (playingUIOffsets.breath === 0) {
-        if (keyDown[k.x]) {
+        if (keyPress[k.x]) {
             if (breath === 0)  {
                 currentBreathMode = breathMode.inhale;
                 soundAssets.inhale.play();
-            }
-            else if (breath === constants.lifeFuncs.breath.fullBreath) {
+            } else if (breath === constants.lifeFuncs.breath.fullBreath) {
                 currentBreathMode = breathMode.exhale;
                 soundAssets.exhale.play();
+            } else {
+                player.stuckTime = 30;
+                soundAssets.cough.play();
             }
             if(Date.now() - keyPromptTime > 3000) {
                 --keyPrompts.breath;
@@ -53,6 +55,7 @@ function updateLife() {
         pressure -= 0.1;
         if (pressure <= 0) {
             pressure = 0;
+            player.die();
         }
     }
 
@@ -75,9 +78,12 @@ function breathe() {
             if (breath >= constants.lifeFuncs.breath.fullBreath) {
                 breath = constants.lifeFuncs.breath.fullBreath;
                 fullBreathTimer++;
-                if (fullBreathTimer >= 600) {
+                if (fullBreathTimer >= 300) {
                     //cough and lose breath or something
                     handleCough();
+                }
+                if (fullBreathTimer >= 400) {
+                    player.die();
                 }
             } else {
                 fullBreathTimer = 0;
@@ -91,6 +97,9 @@ function breathe() {
                 if (noBreathTimer >= 300) {
                     //cough and lose breath or something
                     handleCough();
+                }
+                if (noBreathTimer >= 400) {
+                    player.die();
                 }
             } else {
                 noBreathTimer = 0;
@@ -124,6 +133,7 @@ function heartbeat() {
     pressure += 10;
     if (pressure >= 100) {
         pressure = 100;
+        player.die();
     }
     heartBeat = true;
 

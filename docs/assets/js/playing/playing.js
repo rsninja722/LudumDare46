@@ -3,7 +3,8 @@ var tutorialStates = {
     placeOnGround:1,
     goDownStairs:2,
     getCereal: 3,
-    getMail: 4
+    getMail: 4,
+    goToBed: 5
 };
 
 var tutState = tutorialStates.selectLeg;
@@ -47,7 +48,14 @@ function handlePlaying() {
         case tutorialStates.getCereal:
             break;
         case tutorialStates.getMail:
+            if(!player.holdingBox) {
+                tutState = tutorialStates.goToBed;
+            }
+            break;
+        case tutorialStates.goToBed:
+            if(player.x > 560) {
 
+            }
             break;
     }
 

@@ -19,6 +19,7 @@ class Player {
         this.hover = { active: false, leg: "R" };
         this.holdingBox = false;
         this.armVel = 1;
+        this.stuckTime = 0;
     }
 }
 
@@ -36,11 +37,18 @@ Player.prototype.getLockedLeg = function(){
     return this.rightLeg;
 }
 
+Player.prototype.die = function() {
+    console.warn("player is big ded, rip");
+}
+
 Player.prototype.update = function() {   
     var curLeg = this.getActiveLeg();
     
-    // select
-    if (this.shouldMoveLeg) { 
+    if(this.stuckTime > 0) {
+        --this.stuckTime;
+    }
+    // deselect
+    if (this.shouldMoveLeg && this.stuckTime === 0) { 
         this.moveLeg();
         if(mousePress[0] && collidingWithWorld({x: curLeg.x2, y: curLeg.y2, w:8, h:8})) {
 
@@ -54,7 +62,7 @@ Player.prototype.update = function() {
             // Play the footstep sound
             playRandomFootstep();
         }
-    // deselect
+    // select
     } else {
        
         var targetPos = mousePosition();
@@ -88,18 +96,18 @@ Player.prototype.update = function() {
     }
 
     // god mode
-    if(keyDown[k.w]) {
-        this.y-=5;
-    }
-    if(keyDown[k.s]) {
-        this.y+=5;
-    }
-    if(keyDown[k.a]) {
-        this.x-=5;
-    }
-    if(keyDown[k.d]) {
-        this.x+=5;
-    }
+    // if(keyDown[k.w]) {
+    //     this.y-=5;
+    // }
+    // if(keyDown[k.s]) {
+    //     this.y+=5;
+    // }
+    // if(keyDown[k.a]) {
+    //     this.x-=5;
+    // }
+    // if(keyDown[k.d]) {
+    //     this.x+=5;
+    // }
 
     var halfPI = pi/2;
     if(this.leftArm.angle > halfPI) {
@@ -288,57 +296,52 @@ Player.prototype.updateHips = function() {
 Player.prototype.draw = function() {
     // rect(this.x, this.y, this.w, this.h, "green");
     img(sprites.playerBody,this.x,this.y,0,4,4);
+    
+    img(sprites.playerHead,this.head.x + Math.cos(this.head.angle) * 20,this.head.y + Math.sin(this.head.angle) * 20,this.head.angle,4,4);
 
-    this.leftArm.draw();
+    if(this.stuckTime) {
+        img(sprites.playerArm,this.x,this.y-50,2,4,4);
+    } else {
+        this.leftArm.draw();
+    }
+    
     this.rightArm.draw();
 
     if(this.holdingBox) {
         img(sprites.boxNoOutline,this.leftArm.x2 - Math.cos(this.leftArm.angle)*15,this.leftArm.y2- Math.sin(this.leftArm.angle)*15,this.leftArm.angle,4,4);
     }
-    // boxNoOutline
+    
+
+
+
+    
     if(this.hover.active) {
         if(this.hover.leg === "R") {
-            curCtx.shadowBlur = 10;
-            curCtx.shadowColor = "yellow";
-            curCtx.lineWidth = 3;
-            this.rightLeg.draw();
-            curCtx.lineWidth = 1;
-            curCtx.shadowBlur = 0;
-            curCtx.shadowColor = "black";
-            this.leftLeg.draw();
+            img(sprites.playerLeg,(this.leftLeg.x+this.leftLeg.x2)/2,(this.leftLeg.y+this.leftLeg.y2)/2,this.leftLeg.angle+pi/2,4,4);
+            img(sprites.playerLegActive,(this.rightLeg.x+this.rightLeg.x2)/2,(this.rightLeg.y+this.rightLeg.y2)/2,this.rightLeg.angle+pi/2,4,4);
         } else {
-            curCtx.shadowBlur = 10;
-            curCtx.shadowColor = "yellow";
-            curCtx.lineWidth = 3;
-            this.leftLeg.draw();
-            curCtx.lineWidth = 1;
-            curCtx.shadowBlur = 0;
-            curCtx.shadowColor = "black";
-            this.rightLeg.draw();
+            img(sprites.playerLegActive,(this.leftLeg.x+this.leftLeg.x2)/2,(this.leftLeg.y+this.leftLeg.y2)/2,this.leftLeg.angle+pi/2,4,4);
+            img(sprites.playerLeg,(this.rightLeg.x+this.rightLeg.x2)/2,(this.rightLeg.y+this.rightLeg.y2)/2,this.rightLeg.angle+pi/2,4,4);
         }
     } else {
-        this.leftLeg.draw();
-        this.rightLeg.draw();
-    }
-
-    img(sprites.playerHead,this.head.x + Math.cos(this.head.angle) * 20,this.head.y + Math.sin(this.head.angle) * 20,this.head.angle,4,4);
-
-    img(sprites.playerLeg,(this.leftLeg.x+this.leftLeg.x2)/2,(this.leftLeg.y+this.leftLeg.y2)/2,this.leftLeg.angle+pi/2,4,4);
+        img(sprites.playerLeg,(this.leftLeg.x+this.leftLeg.x2)/2,(this.leftLeg.y+this.leftLeg.y2)/2,this.leftLeg.angle+pi/2,4,4);
     img(sprites.playerLeg,(this.rightLeg.x+this.rightLeg.x2)/2,(this.rightLeg.y+this.rightLeg.y2)/2,this.rightLeg.angle+pi/2,4,4);
+    }
+    
 
     if(this.shouldMoveLeg) {
         if(this.legSelected === "R") {
             var active = collidingWithWorld({x: this.rightLeg.x2, y: this.rightLeg.y2, w:8, h:8});
-            img(sprites.playerFoot,this.leftLeg.x2,this.leftLeg.y2,0,-4,4);
-            img(sprites["playerFoot" + (active ? "Active" : "")],this.rightLeg.x2,this.rightLeg.y2,0,4,4);
+            img(sprites.playerFoot,this.leftLeg.x2,this.leftLeg.y2,0,-5,5);
+            img(sprites["playerFoot" + (active ? "Active" : "")],this.rightLeg.x2,this.rightLeg.y2,0,5,5);
         } else {
             var active = collidingWithWorld({x: this.leftLeg.x2, y: this.leftLeg.y2, w:8, h:8});
-            img(sprites["playerFoot" + (active ? "Active" : "")],this.leftLeg.x2,this.leftLeg.y2,0,-4,4);
-            img(sprites.playerFoot,this.rightLeg.x2,this.rightLeg.y2,0,4,4);
+            img(sprites["playerFoot" + (active ? "Active" : "")],this.leftLeg.x2,this.leftLeg.y2,0,-5,5);
+            img(sprites.playerFoot,this.rightLeg.x2,this.rightLeg.y2,0,5,5);
         }
     } else {
-        img(sprites.playerFoot,this.leftLeg.x2,this.leftLeg.y2,0,-4,4);
-        img(sprites.playerFoot,this.rightLeg.x2,this.rightLeg.y2,0,4,4);
+        img(sprites.playerFoot,this.leftLeg.x2,this.leftLeg.y2,0,-5,5);
+        img(sprites.playerFoot,this.rightLeg.x2,this.rightLeg.y2,0,5,5);
     }
 }
 

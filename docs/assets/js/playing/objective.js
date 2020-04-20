@@ -37,5 +37,5 @@ function drawObjectives() {
     }
 }
 
-Objectives.push(new Objective(-140,108,60,300,"cereal",function(){console.log("%c cereal obtained 😎","font-size:200%;");}));
+Objectives.push(new Objective(-140,108,60,300,"cereal",function(){console.log("%c cereal obtained 😎","font-size:200%;");tutState = tutorialStates.getMail;}));
 Objectives.push(new Objective(-740,156,50,50,"box",function(){console.log("%c the entire mailbox obtained 😎","font-size:200%;");player.holdingBox = true;}));

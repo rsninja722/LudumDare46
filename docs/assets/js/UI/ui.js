@@ -20,8 +20,60 @@ function drawPlayingUI() {
     //Respiration Monitor
     respiratoryUI(cw / 8 * 5, ch / 8 * 7 - 8 + playingUIOffsets.breath, cw / 16, ch / 8);
 
-    //Blink eye and overlay
+    //Blink eye
     blinkUI();
+    
+
+    switch(tutState) {
+        case tutorialStates.getCereal:
+            text("Objective: eat breakfast",10,ch-30,"black",2);
+            break;
+        case tutorialStates.getMail:
+            text("Objective: bring in the mail",10,ch-30,"black",2);
+            break;
+        case tutorialStates.goToBed:
+            text("Objective: go back to bed",10,ch-30,"black",2);
+            break;
+    }
+
+    var alpha;
+    // dry overlay
+    if (eyeDryness > constants.lifeFuncs.blink.dryTime) {
+        alpha = (eyeDryness - constants.lifeFuncs.blink.dryTime) / 350;
+        curCtx.globalAlpha = alpha;
+        img(sprites.blinkOverlay, cw / 2, ch / 2);
+    }
+
+    // blue overlay
+    switch (currentBreathMode) {
+        case breathMode.inhale:
+            if (fullBreathTimer >= 200) {
+                alpha = (fullBreathTimer-200) / 200;
+                curCtx.globalAlpha = clamp(alpha,0,1);
+                img(sprites.breathOverlay, cw / 2, ch / 2);
+            }
+            break;
+        case breathMode.exhale:
+            if (noBreathTimer >= 200) {
+                alpha = (noBreathTimer-200) / 200;
+                curCtx.globalAlpha = clamp(alpha,0,1);
+                img(sprites.breathOverlay, cw / 2, ch / 2);
+            }
+            break;
+    }
+
+    if(pressure > 80) {
+        alpha = (pressure-80) / 20;
+        curCtx.globalAlpha = clamp(alpha,0,1);
+        img(sprites.beatOverlay, cw / 2, ch / 2);
+    }
+
+    if( pressure < 25 ) {
+        alpha = (25-pressure) / 25;
+        curCtx.globalAlpha = clamp(alpha,0,1);
+        img(sprites.beatOverlay, cw / 2, ch / 2);
+    }
+    curCtx.globalAlpha = 1;
 }
 
 //UI for pause screen
@@ -164,13 +216,5 @@ function blinkUI() {
     var alpha = clamp(eyeDryness / constants.lifeFuncs.blink.dryTime, 0, 1);
     curCtx.globalAlpha = alpha;
     img(sprites.eyeDry, cw - 350, ch - 40 + playingUIOffsets.blink, 0, 2, 2);
-
-    // dry overlay
-    if (eyeDryness > constants.lifeFuncs.blink.dryTime) {
-        alpha = (eyeDryness - constants.lifeFuncs.blink.dryTime) / 350;
-        curCtx.globalAlpha = alpha;
-        img(sprites.blinkOverlay, cw / 2, ch / 2);
-    }
-
     curCtx.globalAlpha = 1;
 }
