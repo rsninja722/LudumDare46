@@ -33,7 +33,12 @@ images = [
     "lungs.png",
     "lungCover.png",
     "lungBack.png",
-    "chandelier.png"
+    "chandelier.png",
+    "buttonBigHover.png",
+    "buttonBig.png",
+    "buttonSmallHover.png",
+    "buttonSmall.png",
+    "backGround.png"
 ];
 
 audio = [

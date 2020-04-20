@@ -16,15 +16,35 @@
                 border: 5px solid var(--theme-webpage-canvas_border);
                 background-color: var(--theme-webpage-canvas_bg);
             }
+            a {
+                color: white;
+                text-decoration: none;
+            }
+            a:visited {
+                color: rgb(190, 190, 190);
+            }
         </style>
         <link rel="stylesheet" href="assets/css/main.css">
     </head>
     <body>
         <canvas width="800" height="600" id="game"></canvas>
-        <pre style="position: absolute;left: 0;bottom: 0;"> TODO REMOVE ME 
-z: blink
-x: breath
-c: beat heart
+        <pre style="position:absolute;font-family: PixelArial11;font-size: 32px;display:none;" id="credits">
+<u>Programming</u> 
+<a href="https://rsninja.dev">rsninja dev</a>
+<a href="https://wm-c.dev">William Meathrel</a>
+<a href="https://retrylife.ca/">Evan Pratten</a>
+<a href="https://exvacuum.dev">Silas Bartha</a>
+<a href="https://www.youtube.com/channel/UC5TeGG-Ak6ouX5JdxZB-ESg">MarshMarlow</a>
+
+<u>Art</u>
+Sally Lopez 
+<a href="https://rsninja.dev">rsninja dev</a>
+
+<u>Music</u>
+Matthew West
+
+<u>Sounds</u>
+<a href="https://retrylife.ca/">Evan Pratten</a>
         </pre>
 
         <!-- Graphics Library -->
