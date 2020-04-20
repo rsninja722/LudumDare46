@@ -101,6 +101,18 @@ function drawPlaying() {
 
         // drawWorldBlocks();
         player.draw();
+        
+        if(player.shouldMoveLeg) {
+            curCtx.globalAlpha = 0.3;
+            curCtx.lineCap = "round";
+            curCtx.shadowColor = "yellow";
+            curCtx.shadowBlur = 10;
+            line(player.x,player.y,mousePosition().x,mousePosition().y,2*clamp(dist(player.getActiveLeg(), mousePosition()) / constants.player.movement_divider, 0.1, constants.player.max_movement_speed),"#baba30");
+            curCtx.shadowBlur = 0;
+            curCtx.shadowColor = "black";
+            curCtx.lineCap = "butt";
+            curCtx.globalAlpha = 1;
+        }
 
         // beat key
         if(keyPrompts.beat > 0 && playingUIOffsets.heart === 0) {
@@ -127,7 +139,8 @@ function drawPlaying() {
                 img(sprites["tutSelect"+~~(frameCount/10)%2],(player.leftLeg.x+player.leftLeg.x2)/2,(player.leftLeg.y+player.leftLeg.y2)/2,0,2,2);
                 break;
             case tutorialStates.placeOnGround:
-                img(sprites["tutSelect"+~~(frameCount/10)%2],500,-40,2,2);
+                img(sprites["tutSelect"+~~(frameCount/10)%2],430,-10,0,2,2);
+                img(sprites.turn,560,-140,(~~(frameCount/10)%2) / 4,2,2);
                 break;
             case tutorialStates.goDownStairs:
                 img(sprites.tutArrow,360+~~(frameCount/10)%2,-30-~~(frameCount/10)%2,0,2,2);

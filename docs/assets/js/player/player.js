@@ -6,8 +6,8 @@ class Player {
         this.h = constants.player.height;
         this.hipLeft = { x: this.x + constants.player.hip.offset_x, y: this.y + constants.player.hip.offset_y };
         this.hipRight = { x: this.x - constants.player.hip.offset_x, y: this.y + constants.player.hip.offset_y };
-        this.leftLeg = new Leg(this.hipLeft.x, this.hipLeft.y, constants.player.leg_length, Math.PI*2.5);
-        this.rightLeg = new Leg(this.hipRight.x, this.hipRight.y, constants.player.leg_length, Math.PI*2.5);
+        this.leftLeg = new Leg(this.hipLeft.x, this.hipLeft.y, constants.player.leg_length, 1.5);
+        this.rightLeg = new Leg(this.hipRight.x, this.hipRight.y, constants.player.leg_length, 1.5);
         this.leftArm = new Arm(this.hipLeft.x + 8, this.y - constants.player.hip.offset_y, 64, Math.PI/2);
         this.rightArm = new Arm(this.hipRight.x - 8, this.y - constants.player.hip.offset_y, 64, Math.PI/2);
         this.head = {x:this.x,y:this.y-this.h/2,angle:Math.PI*1.5};
@@ -180,6 +180,10 @@ Player.prototype.moveLeg = function(){
 
     // console.log(curLeg.angle.toPrecision(5),pointTo(curLeg,target).toPrecision(5));
     var angleDif = turn(curLeg.angle, pointTo(curLeg, target), constants.player.leg_speed) - curLeg.angle;
+    if(Math.abs(angleDif) > 1) {
+        curLeg.angle =  pointTo(curLeg, target);
+        angleDif = 0;
+    }
     curLeg.angle += angleDif;
     curLeg.x2 = curLeg.x + curLeg.len * Math.cos(curLeg.angle);
     curLeg.y2 = curLeg.y + curLeg.len * Math.sin(curLeg.angle);

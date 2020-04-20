@@ -38,7 +38,8 @@ images = [
     "buttonBig.png",
     "buttonSmallHover.png",
     "buttonSmall.png",
-    "backGround.png"
+    "backGround.png",
+    "turn.png"
 ];
 
 audio = [

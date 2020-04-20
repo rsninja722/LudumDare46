@@ -156,11 +156,11 @@ function heartBeatUI(x, y, width, height) {
     //Backdrop
     var BackdropColor;
     if (pressure > 42 && pressure < 60) {
-        BackdropColor = "#0c2605";
+        BackdropColor = "#398026";
     } else if (pressure > 28 && pressure < 75) {
-        BackdropColor = "#2b2b06";
+        BackdropColor = "#9e9e2e";
     } else {
-        BackdropColor = "#260505";
+        BackdropColor = "#d42828";
     }
     rect(x + width / 2, y + height / 2, width, height, BackdropColor);
     img(sprites.heartBack, cw - 107, ch - 46 + playingUIOffsets.heart);
