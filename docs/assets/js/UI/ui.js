@@ -26,13 +26,22 @@ function drawPlayingUI() {
 
     switch(tutState) {
         case tutorialStates.getCereal:
-            text("Objective: eat breakfast",10,ch-30,"black",2);
+            curCtx.globalAlpha = 0.5;
+            rect(150,ch-15,300,30,"white");
+            curCtx.globalAlpha = 1;
+            text("Objective: eat breakfast",10,ch-25,"black",2);
             break;
         case tutorialStates.getMail:
-            text("Objective: bring in the mail",10,ch-30,"black",2);
+            curCtx.globalAlpha = 0.5;
+            rect(170,ch-15,340,30,"white");
+            curCtx.globalAlpha = 1;
+            text("Objective: bring in the mail",10,ch-25,"black",2);
             break;
         case tutorialStates.goToBed:
-            text("Objective: go back to bed",10,ch-30,"black",2);
+            curCtx.globalAlpha = 0.5;
+            rect(150,ch-15,300,30,"white");
+            curCtx.globalAlpha = 1;
+            text("Objective: go back to bed",10,ch-25,"black",2);
             break;
     }
 

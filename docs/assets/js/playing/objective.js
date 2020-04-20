@@ -15,6 +15,9 @@ Objective.prototype.draw = function() {
 
 Objective.prototype.update = function() {
     if(rectrect(this,player)) {
+        for(var j=0;j<50;j++) {
+            Particles.push(new Particle(this.x,this.y));
+        }
         this.callback();
         return true;
     }

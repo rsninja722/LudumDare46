@@ -60,7 +60,7 @@ var constants = {
             offset_y: 35
         },
         defaultX: 575,
-        defaultY: -150
+        defaultY: -155
     }
 
 };

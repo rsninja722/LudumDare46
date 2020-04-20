@@ -48,13 +48,13 @@ function handlePlaying() {
         case tutorialStates.getCereal:
             break;
         case tutorialStates.getMail:
-            if(!player.holdingBox) {
+            if(boxOnTable) {
                 tutState = tutorialStates.goToBed;
             }
             break;
         case tutorialStates.goToBed:
             if(player.x > 560) {
-
+                globalState = globalStates.end;
             }
             break;
     }
@@ -81,6 +81,7 @@ function handlePlaying() {
     }
 
     updateLife();
+    updateParticles();
     updateObjectives();
 }
 
@@ -95,6 +96,9 @@ function drawPlaying() {
         if(boxOnTable) {
             imgIgnoreCutoff(sprites.boxNoOutline,-140,116,0,4,4);
         }
+
+        drawParticles();
+
         // drawWorldBlocks();
         player.draw();
 
