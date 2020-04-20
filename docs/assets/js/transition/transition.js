@@ -54,5 +54,4 @@ function drawLevelTransitionUI() {
 
     // resets alpha for rest of drawing
     canvases.ctx.globalAlpha = 1;
-    
 }

@@ -39,7 +39,8 @@ images = [
     "buttonSmallHover.png",
     "buttonSmall.png",
     "backGround.png",
-    "turn.png"
+    "turn.png",
+    "slep.png"
 ];
 
 audio = [
@@ -78,7 +79,7 @@ function update() {
             break;
         // end
         case globalStates.end:
-
+            updateCutScene();
             break;
         //building - to be used only in development
         case globalStates.building:
@@ -111,11 +112,10 @@ function draw() {
             break;
         // dead
         case globalStates.dead:
-            
             break;
         // end
         case globalStates.end:
-
+            drawCutScene();
             break;
         //building - to be used only in development
         case globalStates.building:
