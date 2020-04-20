@@ -50,7 +50,7 @@ var globalStates = {
     titleScreen: 0,
     levelTransition: 1,
     playing: 2,
-    paused: 3,
+    dead: 3,
     end: 4,
     building: 5
 };
@@ -72,9 +72,9 @@ function update() {
             handlePlaying();
             player.update();
             break;
-        // paused
-        case globalStates.paused:
-
+        // dead
+        case globalStates.dead:
+            handleDead();
             break;
         // end
         case globalStates.end:
@@ -109,9 +109,9 @@ function draw() {
         case globalStates.playing:
             drawPlaying();
             break;
-        // paused
-        case globalStates.paused:
-
+        // dead
+        case globalStates.dead:
+            
             break;
         // end
         case globalStates.end:
@@ -139,9 +139,9 @@ function absoluteDraw() {
         case globalStates.playing:
             drawPlayingUI();
             break;
-        // paused
-        case globalStates.paused:
-            drawPausedUI();
+        // dead
+        case globalStates.dead:
+            deadUI();
             break;
         // end
         case globalStates.end:

@@ -6,7 +6,7 @@ function handleTransition(){
 
     // Calculates alpha until its zero
     if(currentAlpha > 0){
-        currentAlpha -= .005;
+        currentAlpha -= .01;
     }
 
 
@@ -39,7 +39,7 @@ function drawLevelTransitionUI() {
     // draws background sprites
     drawWorldBlocks();
     imgIgnoreCutoff(sprites.epic,0,0);
-    imgIgnoreCutoff(sprites.chandelier,770,-235,0,4,4);
+    imgIgnoreCutoff(sprites.chandelier,770,-300,0,4,4);
     player.draw();
 
     // sets alpha to calculated alpha for black

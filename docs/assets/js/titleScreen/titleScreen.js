@@ -28,6 +28,7 @@ function handleMainScreen() {
     if (!firstFrame) {
         if (mousePress[0]) {
             if (rectpoint({ x: 400, y: 200, w: 300, h: 50 }, mousePos)) {
+                soundAssets.click.play();
                 globalState = globalStates.levelTransition;
 
                 // Play the bgm
@@ -35,6 +36,7 @@ function handleMainScreen() {
             }
 
             if (rectpoint({ x: 400, y: 550, w: 300, h: 50 }, mousePos)) {
+                soundAssets.click.play();
                 titleScreenState = "credits"
                 timer = 0;
             }
@@ -54,6 +56,7 @@ function handleCredits() {
     elemStyle.top = canvases.cvs.offsetTop + 20 + "px";
 
     if (rectpoint({ x: 80, y: 550, w: 140, h: 50 }, mousePos) && mousePress[0]) {
+        soundAssets.click.play();
         titleScreenState = "main";
     }
 }

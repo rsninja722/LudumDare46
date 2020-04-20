@@ -85,10 +85,6 @@ function drawPlayingUI() {
     curCtx.globalAlpha = 1;
 }
 
-//UI for pause screen
-function drawPausedUI() {
-}
-
 //UI for game end
 function drawEndUI() {
 }

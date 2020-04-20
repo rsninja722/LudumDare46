@@ -6,7 +6,7 @@ class Particle {
         var angle = rand(0,2262)/360;
         var speed = rand(5,10);
         this.vel = {x:Math.cos(angle) * speed,y:Math.sin(angle) * speed};
-        this.timer = rand(25,50);
+        this.timer = rand(50,150);
     }
 }
 

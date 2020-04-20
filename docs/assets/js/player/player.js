@@ -38,6 +38,8 @@ Player.prototype.getLockedLeg = function(){
 }
 
 Player.prototype.die = function() {
+    soundAssets.dead.play();
+    globalState = globalStates.dead;
     console.warn("player is big ded, rip");
 }
 

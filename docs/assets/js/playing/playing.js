@@ -91,7 +91,7 @@ function drawPlaying() {
 
         imgIgnoreCutoff(sprites.epic,0,0);
         imgIgnoreCutoff(sprites.post,-740,156,0,4,4);
-        imgIgnoreCutoff(sprites.chandelier,770,-235,0,4,4);
+        imgIgnoreCutoff(sprites.chandelier,770,-300,0,4,4);
 
         if(boxOnTable) {
             imgIgnoreCutoff(sprites.boxNoOutline,-140,116,0,4,4);
