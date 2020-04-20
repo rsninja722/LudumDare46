@@ -24,7 +24,13 @@ images = [
     "playerBody.png",
     "playerLeg.png",
     "playerArm.png",
-    "playerHead.png"
+    "playerHead.png",
+    "playerFoot.png",
+    "playerFootActive.png",
+    "lungs.png",
+    "lungCover.png",
+    "lungBack.png",
+    "chandelier.png"
 ];
 
 audio = [

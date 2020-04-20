@@ -88,18 +88,18 @@ Player.prototype.update = function() {
     }
 
     // god mode
-    // if(keyDown[k.w]) {
-    //     this.y-=5;
-    // }
-    // if(keyDown[k.s]) {
-    //     this.y+=5;
-    // }
-    // if(keyDown[k.a]) {
-    //     this.x-=5;
-    // }
-    // if(keyDown[k.d]) {
-    //     this.x+=5;
-    // }
+    if(keyDown[k.w]) {
+        this.y-=5;
+    }
+    if(keyDown[k.s]) {
+        this.y+=5;
+    }
+    if(keyDown[k.a]) {
+        this.x-=5;
+    }
+    if(keyDown[k.d]) {
+        this.x+=5;
+    }
 
     var halfPI = pi/2;
     if(this.leftArm.angle > halfPI) {
@@ -326,8 +326,20 @@ Player.prototype.draw = function() {
     img(sprites.playerLeg,(this.leftLeg.x+this.leftLeg.x2)/2,(this.leftLeg.y+this.leftLeg.y2)/2,this.leftLeg.angle+pi/2,4,4);
     img(sprites.playerLeg,(this.rightLeg.x+this.rightLeg.x2)/2,(this.rightLeg.y+this.rightLeg.y2)/2,this.rightLeg.angle+pi/2,4,4);
 
-    
-    
+    if(this.shouldMoveLeg) {
+        if(this.legSelected === "R") {
+            var active = collidingWithWorld({x: this.rightLeg.x2, y: this.rightLeg.y2, w:8, h:8});
+            img(sprites.playerFoot,this.leftLeg.x2,this.leftLeg.y2,0,-4,4);
+            img(sprites["playerFoot" + (active ? "Active" : "")],this.rightLeg.x2,this.rightLeg.y2,0,4,4);
+        } else {
+            var active = collidingWithWorld({x: this.leftLeg.x2, y: this.leftLeg.y2, w:8, h:8});
+            img(sprites["playerFoot" + (active ? "Active" : "")],this.leftLeg.x2,this.leftLeg.y2,0,-4,4);
+            img(sprites.playerFoot,this.rightLeg.x2,this.rightLeg.y2,0,4,4);
+        }
+    } else {
+        img(sprites.playerFoot,this.leftLeg.x2,this.leftLeg.y2,0,-4,4);
+        img(sprites.playerFoot,this.rightLeg.x2,this.rightLeg.y2,0,4,4);
+    }
 }
 
 // https://github.com/scottglz/distance-to-line-segment/blob/master/index.js
