@@ -38,7 +38,7 @@ class SoundSnippet {
     cache(callback) {
 
         // Set the audio SRC
-        this.audio = new Howl({src:[this.assetPath]});
+        this.audio = new Howl({src:[this.assetPath], loop: (this.assetType == audioAssetType.bgm.bgm)});
 
         // Create a callback for loading finished
         this.audio.once("load", () => {
@@ -72,6 +72,24 @@ class SoundSnippet {
 
     }
 
+    playForever() {
+        // If autoplay is disabled, we notify the console
+        if (canPlayAudio()) {
+
+            console.log(`[SoundSnippet] Playing ${this.asset_name} forever`);
+
+
+            // Play the snippet
+            this.audio.play();
+
+            // Schedule a replay worker
+            setInterval(() => { this.audio.play(); console.log(`[SoundSnippet] Replaying ${this.asset_name}`) }, this.getLengthSeconds() * 1000);
+
+        } else {
+            console.warn("[SoundSnippet] Tried to play audio with autoplay disabled. The user must press the play button before you can play audio");
+        }
+    }
+
     stop() {
 
         // Stop the snippet
@@ -83,7 +101,7 @@ class SoundSnippet {
      * Get the sound length in seconds
      */
     getLengthSeconds() {
-        return this.audio.duration;
+        return this.audio.duration();
     }
 
     /**
@@ -99,4 +117,5 @@ class SoundSnippet {
     getHash() {
         return this.asset_hash;
     }
+
 }

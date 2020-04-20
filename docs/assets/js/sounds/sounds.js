@@ -22,7 +22,8 @@ let soundAssetMap = {
     "heartbeat": "./assets/sounds/heartbeat.mp3",
     "inhale": "./assets/sounds/breathing/inhale.mp3",
     "exhale": "./assets/sounds/breathing/exhale.mp3",
-    "cough":"./assets/sounds/cough.mp3"
+    "cough": "./assets/sounds/cough.mp3",
+    "backingtrack": "./assets/sounds/backingtrack.wav"
 }
 
 // All available sounds
@@ -37,7 +38,8 @@ let soundAssets = {
     heartbeat: new SoundSnippet("heartbeat", audioAssetType.sfx),
     inhale: new SoundSnippet("inhale", audioAssetType.sfx),
     exhale: new SoundSnippet("exhale", audioAssetType.sfx),
-    cough: new SoundSnippet("cough", audioAssetType.sfx)
+    cough: new SoundSnippet("cough", audioAssetType.sfx),
+    backingtrack: new SoundSnippet("backingtrack", audioAssetType.bgm)
 }
 
 /**

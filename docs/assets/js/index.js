@@ -127,8 +127,6 @@ function absoluteDraw() {
 }
 
 function onAssetsLoaded() {
-
-
 }
 
 setup(60);
