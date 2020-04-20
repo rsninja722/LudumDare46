@@ -47,29 +47,36 @@ function handleCredits(){
             titleScreenState = "main";
             timer = 0;
         }
+
+        // Rsninja
+        if(rectpoint({x:400, y:145, w: 340, h: 30}, {x:cursor.x, y:cursor.y}) && mouseDown[0]){
+            window.open('https://rsninja.dev/', '_blank');
+            timer = 0;
+        }
+
+        // Silas
+        if(rectpoint({x:420, y:227, w: 350, h: 31}, {x:cursor.x, y:cursor.y}) && mouseDown[0]){
+            window.open('https://exvacuum.dev', '_blank');
+            timer = 0;
+        }
+
+        //Evan
+        if(rectpoint({x:430, y:307, w: 360, h: 50}, {x:cursor.x, y:cursor.y}) && mouseDown[0]){
+            window.open('https://retrylife.ca/', '_blank');
+            timer = 0;
+        }
+
+        // // William
+        if(rectpoint({x:460, y:382, w: 420, h: 50}, {x:cursor.x, y:cursor.y}) && mouseDown[0]){
+            window.open('https://wm-c.dev', '_blank');
+            timer = 0;
+        }
+
     }else{
         timer++;
     }
 
-    // Rsninja
-    if(rectpoint({x:400, y:145, w: 340, h: 30}, {x:cursor.x, y:cursor.y}) && mouseDown[0]){
-        window.open('https://rsninja.dev/', '_blank');
-    }
-
-    // Silas
-    if(rectpoint({x:420, y:227, w: 350, h: 31}, {x:cursor.x, y:cursor.y}) && mouseDown[0]){
-        window.open('https://exvacuum.dev', '_blank');
-    }
-
-    //Evan
-    if(rectpoint({x:430, y:307, w: 360, h: 50}, {x:cursor.x, y:cursor.y}) && mouseDown[0]){
-        window.open('https://retrylife.ca/', '_blank');
-    }
-
-    // // William
-    if(rectpoint({x:460, y:382, w: 420, h: 50}, {x:cursor.x, y:cursor.y}) && mouseDown[0]){
-        window.open('https://wm-c.dev', '_blank');
-    }
+    
         
 
 }
