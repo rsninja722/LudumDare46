@@ -19,6 +19,8 @@ var keyPromptTime;
 
 var frameCount = 0;
 
+var boxOnTable = false;
+
 function handlePlaying() {
     // enter build mode
     if(keyPress[k.BACKSLASH]) {
@@ -71,6 +73,7 @@ function handlePlaying() {
     }
 
     updateLife();
+    updateObjectives();
 }
 
 function drawPlaying() {
@@ -78,6 +81,12 @@ function drawPlaying() {
     if(!justBlinked) {
 
         imgIgnoreCutoff(sprites.epic,0,0);
+        imgIgnoreCutoff(sprites.post,-740,156,0,4,4);
+        imgIgnoreCutoff(sprites.chandelier,770,-235,0,4,4);
+
+        if(boxOnTable) {
+            imgIgnoreCutoff(sprites.boxNoOutline,-140,116,0,4,4);
+        }
         // drawWorldBlocks();
         player.draw();
 
@@ -118,6 +127,8 @@ function drawPlaying() {
     
                 break;
         }
+
+        drawObjectives();
     } else {
         rect(-camera.x - difx + cw/2,-camera.y - dify + ch/2,cw,ch,"black");
         justBlinked = false;

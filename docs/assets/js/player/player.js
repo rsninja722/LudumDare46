@@ -8,12 +8,17 @@ class Player {
         this.hipRight = { x: this.x - constants.player.hip.offset_x, y: this.y + constants.player.hip.offset_y };
         this.leftLeg = new Leg(this.hipLeft.x, this.hipLeft.y, constants.player.leg_length, Math.PI*2.5);
         this.rightLeg = new Leg(this.hipRight.x, this.hipRight.y, constants.player.leg_length, Math.PI*2.5);
+        this.leftArm = new Arm(this.hipLeft.x + 8, this.y - constants.player.hip.offset_y, 64, Math.PI/2);
+        this.rightArm = new Arm(this.hipRight.x - 8, this.y - constants.player.hip.offset_y, 64, Math.PI/2);
+        this.head = {x:this.x,y:this.y-this.h/2,angle:Math.PI*1.5};
         this.legSelected = "R";
         this.shouldMoveLeg = false;
         this.collided = false;
         this.lastBodyX = x;
         this.lastBodyY = y;
         this.hover = { active: false, leg: "R" };
+        this.holdingBox = false;
+        this.armVel = 1;
     }
 }
 
@@ -76,19 +81,62 @@ Player.prototype.update = function() {
         }  
     }
 
+    // place box
+    if(this.holdingBox && this.x > -275 && this.y < 100) {
+        this.holdingBox = false;
+        boxOnTable = true;
+    }
+
     // god mode
-    // if(keyDown[k.w]) {
-    //     this.y-=5;
-    // }
-    // if(keyDown[k.s]) {
-    //     this.y+=5;
-    // }
-    // if(keyDown[k.a]) {
-    //     this.x-=5;
-    // }
-    // if(keyDown[k.d]) {
-    //     this.x+=5;
-    // }
+    if(keyDown[k.w]) {
+        this.y-=5;
+    }
+    if(keyDown[k.s]) {
+        this.y+=5;
+    }
+    if(keyDown[k.a]) {
+        this.x-=5;
+    }
+    if(keyDown[k.d]) {
+        this.x+=5;
+    }
+
+    var halfPI = pi/2;
+    if(this.leftArm.angle > halfPI) {
+        this.leftArm.angle -= 0.05 * this.armVel;
+    }
+    if(this.leftArm.angle < halfPI) {
+        this.leftArm.angle += 0.05 * this.armVel;
+    }
+    if(this.rightArm.angle > halfPI) {
+        this.rightArm.angle -= 0.05 * this.armVel;
+    }
+    if(this.rightArm.angle < halfPI) {
+        this.rightArm.angle += 0.05 * this.armVel;
+    }
+    this.armVel += 0.05;
+
+    if(this.head.angle > halfPI + pi) {
+        this.head.angle -= 0.05;
+    }
+    if(this.head.angle < halfPI + pi) {
+        this.head.angle += 0.05;
+    }
+
+    var arm = this.leftArm;
+    arm.x = this.x + constants.player.hip.offset_x + 8;
+    arm.y = this.y - constants.player.hip.offset_y;
+    arm.x2 = arm.x + arm.len * Math.cos(arm.angle);
+    arm.y2 = arm.y + arm.len * Math.sin(arm.angle);
+
+    var arm = this.rightArm;
+    arm.x = this.x - constants.player.hip.offset_x - 8;
+    arm.y = this.y - constants.player.hip.offset_y;
+    arm.x2 = arm.x + arm.len * Math.cos(arm.angle);
+    arm.y2 = arm.y + arm.len * Math.sin(arm.angle);
+
+    this.head.x = this.x;
+    this.head.y = this.y-this.h/2;
     
     centerCameraOn(this.x,this.y);
     // camera limits
@@ -211,9 +259,24 @@ Player.prototype.moveLeg = function(){
         this.y = this.lastBodyY;
     }
 
+    // arm and head flailing
+    var bodyDifY = this.lastBodyY - this.y;
+    if(!isNaN(bodyDifY)) {
+        if(bodyDifY < 0) {
+            this.leftArm.angle -= Math.abs(bodyDifY)/10;
+            this.rightArm.angle += Math.abs(bodyDifY)/10;
+        }
+    }
+    var bodyDifX = this.lastBodyX - this.x;
+    if(!isNaN(bodyDifX)) {
+        this.leftArm.angle -= bodyDifX/20;
+        this.rightArm.angle -= bodyDifX/20;
+        this.head.angle += bodyDifX/30;
+    }
 
     this.lastBodyX = this.x;
     this.lastBodyY = this.y;
+    this.armVel = 1;
 }
 
 Player.prototype.updateHips = function() {
@@ -223,7 +286,16 @@ Player.prototype.updateHips = function() {
 
 
 Player.prototype.draw = function() {
-    rect(this.x, this.y, this.w, this.h, "green");
+    // rect(this.x, this.y, this.w, this.h, "green");
+    img(sprites.playerBody,this.x,this.y,0,4,4);
+
+    this.leftArm.draw();
+    this.rightArm.draw();
+
+    if(this.holdingBox) {
+        img(sprites.boxNoOutline,this.leftArm.x2 - Math.cos(this.leftArm.angle)*15,this.leftArm.y2- Math.sin(this.leftArm.angle)*15,this.leftArm.angle,4,4);
+    }
+    // boxNoOutline
     if(this.hover.active) {
         if(this.hover.leg === "R") {
             curCtx.shadowBlur = 10;
@@ -247,6 +319,26 @@ Player.prototype.draw = function() {
     } else {
         this.leftLeg.draw();
         this.rightLeg.draw();
+    }
+
+    img(sprites.playerHead,this.head.x + Math.cos(this.head.angle) * 20,this.head.y + Math.sin(this.head.angle) * 20,this.head.angle,4,4);
+
+    img(sprites.playerLeg,(this.leftLeg.x+this.leftLeg.x2)/2,(this.leftLeg.y+this.leftLeg.y2)/2,this.leftLeg.angle+pi/2,4,4);
+    img(sprites.playerLeg,(this.rightLeg.x+this.rightLeg.x2)/2,(this.rightLeg.y+this.rightLeg.y2)/2,this.rightLeg.angle+pi/2,4,4);
+
+    if(this.shouldMoveLeg) {
+        if(this.legSelected === "R") {
+            var active = collidingWithWorld({x: this.rightLeg.x2, y: this.rightLeg.y2, w:8, h:8});
+            img(sprites.playerFoot,this.leftLeg.x2,this.leftLeg.y2,0,-4,4);
+            img(sprites["playerFoot" + (active ? "Active" : "")],this.rightLeg.x2,this.rightLeg.y2,0,4,4);
+        } else {
+            var active = collidingWithWorld({x: this.leftLeg.x2, y: this.leftLeg.y2, w:8, h:8});
+            img(sprites["playerFoot" + (active ? "Active" : "")],this.leftLeg.x2,this.leftLeg.y2,0,-4,4);
+            img(sprites.playerFoot,this.rightLeg.x2,this.rightLeg.y2,0,4,4);
+        }
+    } else {
+        img(sprites.playerFoot,this.leftLeg.x2,this.leftLeg.y2,0,-4,4);
+        img(sprites.playerFoot,this.rightLeg.x2,this.rightLeg.y2,0,4,4);
     }
 }
 

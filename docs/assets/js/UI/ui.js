@@ -40,8 +40,17 @@ function drawEndUI() {
  */
 
 function respiratoryUI(x, y, width, height) {
-    cartesianRect(x, y, width, height, "rgb(" + noBreathTimer / 180 * 255 + "," + 0 + "," + 0 + ")");
-    cartesianRect(x, y + (height - breath / constants.lifeFuncs.breath.fullBreath * height), width, breath / constants.lifeFuncs.breath.fullBreath * height, "rgb(" + 255 + "," + (255 - fullBreathTimer / 180 * 255) + "," + (255 - fullBreathTimer / 180 * 255) + ")");
+    // cartesianRect(x, y, width, height, "rgb(" + noBreathTimer / 180 * 255 + "," + 0 + "," + 0 + ")");
+    // cartesianRect(x, y + (height - breath / constants.lifeFuncs.breath.fullBreath * height), width, breath / constants.lifeFuncs.breath.fullBreath * height, "rgb(" + 255 + "," + (255 - fullBreathTimer / 180 * 255) + "," + (255 - fullBreathTimer / 180 * 255) + ")");
+
+    var color = currentBreathMode === breathMode.inhale ? "rgb(" + fullBreathTimer + ",0,0)" : "rgb(" + noBreathTimer + ",0,0)";
+    rect(cw - 275, ch - 46 + playingUIOffsets.breath,70,70,color);
+
+    img(sprites.lungBack,cw - 275, ch - 46 + playingUIOffsets.breath);
+
+    img(sprites.lungCover,cw - 275, ch - 46 + playingUIOffsets.breath);
+
+    img(sprites.lungs,cw - 275, ch - 46 + playingUIOffsets.breath, 0, 1.5 + breath / 400, 1.5 + breath / 300 );
 }
 
 /***

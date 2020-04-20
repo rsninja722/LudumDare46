@@ -56,7 +56,7 @@ var constants = {
         select_range: 10,
         leg_length: 75,
         hip: {
-            offset_x: 20,
+            offset_x: 16,
             offset_y: 35
         },
         defaultX: 600,

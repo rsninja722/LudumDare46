@@ -16,7 +16,21 @@ images = [
     "tutArrow.png",
     "tutKeyZ.png",
     "tutKeyX.png",
-    "tutKeyC.png"
+    "tutKeyC.png",
+    "cereal.png",
+    "post.png",
+    "box.png",
+    "boxNoOutline.png",
+    "playerBody.png",
+    "playerLeg.png",
+    "playerArm.png",
+    "playerHead.png",
+    "playerFoot.png",
+    "playerFootActive.png",
+    "lungs.png",
+    "lungCover.png",
+    "lungBack.png",
+    "chandelier.png"
 ];
 
 audio = [
@@ -75,7 +89,7 @@ function draw() {
 
         // title screen
         case globalStates.titleScreen:
-            drawTitleScreen();
+            
             break;
         // level transition
         case globalStates.levelTransition:
@@ -107,6 +121,7 @@ function absoluteDraw() {
         // title screen
         case globalStates.titleScreen:
             drawTitleScreenUI();
+            drawTitleScreen();
             break;
         // level transition
         case globalStates.levelTransition:
