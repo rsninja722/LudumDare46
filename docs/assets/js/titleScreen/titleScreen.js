@@ -68,7 +68,7 @@ function drawTitleScreen() {
     if (titleScreenState === "main") {
         img(sprites.backGround, cw / 2, ch / 2);
 
-        text("GAME TITLE HERE", 50, 50, "white", 8, 1000);
+        text("MicroManaged Mike", 100, 70, "white", 6);
         // rect(415, 200, 300, 50, "green");
         img(sprites["buttonBig" + (rectpoint({ x: 400, y: 200, w: 300, h: 50 }, mousePos) ? "Hover" : "")], 400, 200, 0, 2, 2);
         text("Play!", 340, 185, "#403826", 5, 150);

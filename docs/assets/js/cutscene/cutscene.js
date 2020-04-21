@@ -29,6 +29,12 @@ function updateCutScene() {
             vel += 0.1;
         }
     }
+    if(cutTime===52) {
+        soundAssets.crack.play();
+    }
+    if(cutTime===140) {
+        soundAssets.crash.play();
+    }
     if (cutTime >= 500) {
         globalState = globalStates.titleScreen;
         titleScreenState = "credits";

@@ -53,6 +53,11 @@ function updateLife() {
         }
 
         pressure -= 0.1;
+        if(~~(pressure*10)/10 === 28) {
+            soundAssets.beep2.play();
+        } else if(~~(pressure*10)/10 === 42){
+            soundAssets.beep1.play();
+        }
         if (pressure <= 0) {
             pressure = 0;
             player.die();
@@ -134,6 +139,11 @@ function heartbeat() {
     if (pressure >= 100) {
         pressure = 100;
         player.die();
+    }
+    if(pressure>75) {
+        soundAssets.beep2.play();
+    } else if(pressure>60){
+        soundAssets.beep1.play();
     }
     heartBeat = true;
 

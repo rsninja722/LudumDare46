@@ -27,6 +27,12 @@ let soundAssetMap = {
     "click": "./assets/sounds/click.mp3",
     "hover": "./assets/sounds/hover.wav",
     "pickUp": "./assets/sounds/pickUp.wav",
+    "selectLeg": "./assets/sounds/selectLeg.mp3",
+    "crash": "./assets/sounds/crash.mp3",
+    "crack": "./assets/sounds/crack.mp3",
+    "clonk": "./assets/sounds/clonk.mp3",
+    "beep1": "./assets/sounds/beep1.wav",
+    "beep2": "./assets/sounds/beep2.wav",
     "backingtrack": "./assets/sounds/backingtrack.wav"
 }
 
@@ -47,6 +53,12 @@ let soundAssets = {
     click: new SoundSnippet("click", audioAssetType.sfx),
     hover: new SoundSnippet("hover", audioAssetType.sfx),
     pickUp: new SoundSnippet("pickUp", audioAssetType.sfx),
+    selectLeg: new SoundSnippet("selectLeg", audioAssetType.sfx),
+    crash: new SoundSnippet("crash", audioAssetType.sfx),
+    crack: new SoundSnippet("crack", audioAssetType.sfx),
+    clonk: new SoundSnippet("clonk", audioAssetType.sfx),
+    beep1: new SoundSnippet("beep1", audioAssetType.sfx),
+    beep2: new SoundSnippet("beep2", audioAssetType.sfx),
     backingtrack: new SoundSnippet("backingtrack", audioAssetType.bgm)
 }
 

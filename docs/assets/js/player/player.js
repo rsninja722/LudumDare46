@@ -81,6 +81,7 @@ Player.prototype.update = function() {
                 this.shouldMoveLeg = true;
                 this.legSelected = "R";
                 this.hover.active = false;
+                soundAssets.selectLeg.play();
             }
             //left
         } else if (distanceToLineSegment(this.leftLeg.x, this.leftLeg.y, this.leftLeg.x2, this.leftLeg.y2, targetPos.x, targetPos.y) < constants.player.select_range) {
@@ -93,6 +94,7 @@ Player.prototype.update = function() {
                 this.shouldMoveLeg = true;
                 this.legSelected = "L";
                 this.hover.active = false;
+                soundAssets.selectLeg.play();
             }
         } else {
             this.hover.active = false;
@@ -103,6 +105,7 @@ Player.prototype.update = function() {
     if(this.holdingBox && this.x > -275 && this.y < 100) {
         this.holdingBox = false;
         boxOnTable = true;
+        soundAssets.clonk.play();
     }
 
     // god mode
